@@ -1,0 +1,17 @@
+coladmin :  id , username , password
+
+colclient : id , username , password , phone , email , money , type : google , face  , createddate , (status - pending active - cái này dùng mail)
+
+colslide , colmenu : id, name, orderby , createddate , status
+
+colfooter : id, name, orderby , createddate , status
+
+colcategory : id, name , createddate , status
+
+colproduct : id , nameproduct , namecategory , clientid , createddate , status .
+
+colBid : id , product id , mincost, t1 , t2 . // bảng phiên đấu giá này chứa id sản phẩm ,giá khởi điểm  thời gian bắt đầu , kêt thúc đấu giá - Phòng trường hợp không ai đặt mua thì phải hủy phiên và sắp xếp lại thời gian
+
+colPrice : id , Bid-id ,clientid(người ra giá), price , datecreate // Bảng này chứa id của colBid (phiên đấu giá) , giá đặt , thời gian đặt 
+
+colcomplete : id , nameproduct , namecategory , clientid , createddate , price(giá chốt)
