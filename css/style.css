@@ -285,6 +285,17 @@ ul.multi-column-dropdown:nth-child(3) {
     background-size: cover;
     min-height: 210px;
 }
+.time-request {
+	font-style: normal;
+	color: #676767;
+	font: bold 21px/1em 'Raleway';
+	background: #e4e4e4;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+	padding: 10px 13px;
+	z-index: 1;
+}
 .new-add2 h6 {
     font-family: 'Fascinate', cursive;
     font-size: 2.1em;
@@ -524,6 +535,9 @@ ul.multi-column-dropdown:nth-child(3) {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+.clearTop{
+    margin-bottom: 130px;
 }
 .banner {
     background: #33414e;
