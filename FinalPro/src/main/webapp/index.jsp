@@ -1,17 +1,23 @@
-<%-- 
-    Document   : index
-    Created on : Feb 2, 2018, 12:51:23 PM
-    Author     : apple
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        
+        <jsp:include page="head.jsp"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <!--header-->
+        <jsp:include page="headermenu.jsp"/>
+        <!--//header-->
+        
+        <jsp:include page="content.jsp"/>
+
+        <!--footer-->
+        <jsp:include page="footer.jsp" />
+        <!--//footer-->		
+        <jsp:include page="jsfooter.jsp"/>
     </body>
 </html>
+

@@ -251,6 +251,10 @@
 
                             break;
                         case 2:
+                            $('.col1' + id).text(username);
+                            $('.col2' + id).text(CryptoJS.MD5(password));
+
+
                             $.ajax({
                                 url: "/admin/coladmin?col=update",
                                 type: 'POST',
@@ -259,26 +263,7 @@
                                     password: password,
                                     id: id
                                 },
-                                success: function (data) {
-                                    var id = data._id.$oid;
-                                    var username = data.username;
-                                    var password = CryptoJS.MD5(data.password);
-
-                                    alert(data);
-
-//                                    $('.contentdata').append(`<tr class="row_` + id + `">
-//                                                    <td>
-//                                                        <button data-id="` + id + `" type="button" class="fa fa-edit btn btn-round btn-primary btnedit"
-//                                                                data-toggle="modal" data-target=".bs-example-modal-sm"></button>
-//
-//                                                        <button type="button" data-id="` + id + `"
-//                                                                class="fa fa-bitbucket-square btn btn-round btn-danger btndelete"></button>
-//                                                    </td>
-//                                                    <td>` + id + `</td>
-//                                                    <td class="col1` + id + `" >` + username + `</td>
-//                                                    <td class="col2` + id + `">` + password + `</td>
-//
-//                                                </tr>`);
+                                success: function () {
 
                                 }
 

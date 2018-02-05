@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
+import org.bson.BsonString;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
@@ -27,18 +28,15 @@ public class servletColadmin extends HttpServlet {
             String password = request.getParameter("password");
             String id = request.getParameter("id");
             if (id != null && username != null && password != null) {
-                Document doc = new Document("username", username)
-                        .append("password", password);
 
-                BasicDBObject query = new BasicDBObject();
-                query.append("_id", new ObjectId(id));
-                Bson newDocument = new Document("$set", doc);
-                new dbs().getcoladmin.findOneAndReplace(query, newDocument);
 
-//                System.out.println(id + username + password + "-----");
-//
-//                dbs.getcoladmin().updateOne(new Document("_id", new ObjectId(id)),
-//                         doc);
+                BasicDBObject doc = new BasicDBObject();
+                doc.append("$set", new BasicDBObject()
+                        .append("username", new BsonString(username))
+                        .append("password", new BsonString(password)));
+
+                new dbs().getcoladmin.updateOne(new BasicDBObject()
+                        .append("_id", new ObjectId(id)), doc);
 
             }
 

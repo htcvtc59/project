@@ -6,6 +6,9 @@ import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
+import com.mongodb.client.model.ReturnDocument;
+import com.mongodb.client.model.UpdateOptions;
 import java.sql.DatabaseMetaData;
 import org.bson.BsonString;
 import org.bson.Document;
@@ -24,12 +27,12 @@ public class dbs {
 
         BasicDBObject bObject = new BasicDBObject();
         bObject.append("$set", new BasicDBObject()
-                .append("username", new BsonString("adadad"))
-         .append("password", new BsonString("dattt")));
+                .append("username", new BsonString("tyytytyt"))
+         .append("password", new BsonString("ioqieqe")));
         
         
-        new dbs().getcoladmin.updateOne(bdboid, bObject);
-
+        Document findOneAndUpdate = (Document) new dbs().getcoladmin.findOneAndUpdate(bdboid, bObject,new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER));
+        System.out.println(findOneAndUpdate.toJson()+"-----");
     }
 
 }
