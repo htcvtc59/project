@@ -3361,3 +3361,39 @@ ul.qty li {
 }
 }
 /*--//responsive-design---*/
+
+/* Modal QuickView */
+.simpleCart_shelfItem p{
+    font-size: 1.2em;
+    color: #212121;
+    margin: 0.5em 0 1em;
+    font-weight: 600;
+}
+.simpleCart_shelfItem p span{
+    color: #999;
+    font-size: .8em;
+    text-decoration: line-through;
+    padding-right: 1em;
+    font-weight: 300;
+}
+.agile_ecommerce_tab_left p i{
+    font-style:normal;
+}
+.simpleCart_shelfItem p a{
+    font-size: 14px;
+    color:#212121;
+    margin: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: .5em 2em;
+    border: 1px solid;
+    border-radius: 25px;
+}
+.simpleCart_shelfItem p a:hover{
+    background:#ff9b05;
+    color:#fff;
+    border:1px solid #ff9b05;
+}
+
+/* Modal QuickView */
+
