@@ -8,7 +8,7 @@ colfooter : id, name, orderby , createddate , status
 
 colcategory : id, name , createddate , status
 
-colproduct : id , nameproduct , idcategory , clientid , createddate , timebegin , timestart , timeend , pricemin , stepprice , status 
+colproduct : id , nameproduct , idcategory , clientid , createddate , timebegin , timestart , timeend , pricemin , stepprice , image , description , status 
 
 colauctioning : id , idproduct , timestart , timeend , pricemax , stepprice , status
 
