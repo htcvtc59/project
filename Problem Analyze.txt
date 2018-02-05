@@ -1,0 +1,82 @@
+﻿Phân tích database - các bảng nghiệp vụ quan trọng 
+1 Bảng Client Account .
+	ID_account      // id cho bản ghi – mặc định , cái này tùy theo kiểu đặt 
+	Username        // Tên tài khoản  , cái này unique , không được giống nhau 
+	Password        // Nếu cầu kỳ có thể tạo partern input bằng jquery cũng ok 
+	Email 	        // Unique Validation
+	Phone 	        // Unique Validation
+	Money           // Số tiền hiện tại trong tài khoản .
+	Status :  cái này là trạng thái tài khoản : 
+		+  Pending  : chờ admin xử lý 
+		+  Active  : Tài khoản đã được admin cấp phép.
+
+2 Bảng Product .	
+	ID_product              // id  cho record .
+	Client_id               // id của thằng  thêm sản phẩm vào 
+	Product_name            // Tên sản phẩm 
+	Product_category        // Chủng loại sản phẩm 
+	Product_description     // Giới thiệu sơ lược về sản phẩm : Text Area là ok , cái này không cần dài
+	Product_Detail          // TÙY - Cài này là thông số chi tiết , dùng ckfinder là hợp lý 
+	Image                   // 1 cái ảnh để show ra 
+	Status : 		        //  Trạng thái của sản phẩm :
+		+ Not sell : trạng thái tồn kho - sản phẩm này thỏa mãn 2 điều kiện :
+			1 - Chưa bán được
+			2 - Không nằm trong một phiên đấu giá nào .
+		+ Pending : Sản phẩm đang nằm trong một phiên đấu giá nào đó sắp diễn ra 
+		+ Doing : Sản phẩm đang nằm trong 1 phiên đấu giá đang diễn ra
+		+ Sold : sản phẩm đã được bán .
+		
+	Buyer_id 				// id của thằng mua sản phẩm thành công 
+	Price					// Giá bán của sản phẩm .
+	2 hàng này lúc sản phẩm có status = "Sold" thì mới cập nhật , nếu không thì để trống. 
+	
+	Nghiệp vụ là : Khi Thêm một  phiên đấu giá thì đồng thời thêm mới sản phẩm nếu sản phẩm này chưa có 
+	trong danh sách , còn nếu sản phẩm này là sản phẩm tồn kho thì cho phép chọn từ kho . Khi phiên đấu giá 
+	được admin xác nhận và đồng ý cho đăng thì trạng thái của sản phẩm lúc đầu sẽ là pending sau đó --> Doing . 
+	Sau khi phiên đấu giá kết thúc , nếu không bán được thì cập nhật status = "Not sell" . nếu 
+	bán được thì status = "Sold" . 
+	
+3 Bảng phiên đấu giá 
+	
+	ID_auction 				 // id record 
+	ID_product 				 // id sản phẩm , từ id --> lấy tên 
+	ID_client 				 // id người đăng sản phẩm .từ id --> lấy thông tin
+	start_price 			 // Giá khởi điểm . 
+	step_price 				 // Bước nhảy giá .
+	time_start 				 // Thời gian bắt đầu 
+	duration 				 // Khoảng thời gian đấu giá 
+	time_end				 // Thời gian kết thúc đấu giá 
+	status 					 // Trạng thái phiên đấu giá : Pending , Doing , Done. Phụ thuộc vào thời gian hiện tại
+	max_price				 // Mỗi lần khách bid cập nhật Giá bán cao nhất của thời điểm hiện tại 
+	bid_times				 // Số lần bids , mỗi lần khách bid giá thì +1 , default = 0
+		- Dựa vào bảng buy_bid : để cập nhật thông tin cho max_price .
+		- Cứ mỗi lần có một người đặt giá , sẽ cập nhật max_price dựa vào id_auction.
+		- Khi phiên đấu giá kết thúc thì cập nhật luôn thằng này , lấy làm giá chốt , đồng thời cập nhật bảng product
+		2 thuộc tính buyer_bid và price.
+		- Nếu không ai đặt giá cho phiên  (n=0) thì coi như phiên kết thúc và sản phẩm bị đẩy vào kho , cập nhật bẳng product
+		
+4 Bảng buyer_bid : Bảng này chứa thông tin về giá bid của các buyer .
+	ID 						// id record.
+	ID_auction 				// id phiên đấu giá .
+	buyer_id 				// id của người bán 
+	buyer_price 			// giá đặt .
+	time 					// Thời điểm mà khách bid giá .
+	
+	NOTE :  - Xử lý sao cho thằng chủ sản phẩm phiên đấu giá không được phép đặt mua sản phẩm của chính hắn
+			- Trong 1 phiên đấu giá , 1 người dùng hợp lệ đặt giá phải có số tiền lớn trong ví lớn hơn giá đăt của hắn 
+			- Đặt giá phải đúng với bước giá (step_price) (buyer_price - max_price)/step_price là số nguyên > 0
+			- Cùng một người dùng đặt giá trong một phiên thì 2 lần đặt cách nhau tối thiểu 10 phút . Cái này dùng bảng
+			buyer_bid để xử lý .
+			
+			- Trong phiên đấu giá có một bảng lịch sử bid giá gồm 10 thanh niên bid giá gần đây nhất
+			
+			- Về phần client thì có quyền cập nhật thông tin sản phẩm của mình , thêm tiền vào tài khoản , xóa sản phẩm 
+			trong kho .
+	
+	
+	
+	
+	
+	
+	
+	
