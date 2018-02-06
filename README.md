@@ -5,4 +5,5 @@
   những người đặt giá của sản phẩm đó .
 * Bỏ chi tiết trang và slide trong trang đó
 * Hiển thi chi tiết trang trên modal view 
+* Bỏ trends 
 
