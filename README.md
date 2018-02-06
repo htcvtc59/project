@@ -6,4 +6,5 @@
 * Bỏ chi tiết trang và slide trong trang đó
 * Hiển thi chi tiết trang trên modal view 
 * Bỏ trends 
+* Sửa ảnh nền trang 
 
