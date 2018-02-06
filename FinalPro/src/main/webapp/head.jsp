@@ -7,18 +7,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <title>Auction</title>
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/asset/client/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<%=request.getContextPath()%>/asset/client/favicon.ico" type="image/x-icon">
+<link rel="icon" href="<%=request.getContextPath()%>/asset/client/favicon.ico" type="image/x-icon">
 
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Modern Shoppe Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+      Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--//for-mobile-apps -->
 <!--Custom Theme files -->
 <link href="<%=request.getContextPath()%>/asset/client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="<%=request.getContextPath()%>/asset/client/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath()%>/asset/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/asset/client/css/flexslider.css" type="text/css" media="screen" />
 <!--//Custom Theme files -->
@@ -29,6 +30,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--cart-->
 <script src="<%=request.getContextPath()%>/asset/client/js/simpleCart.min.js"></script>
 <!--cart-->
+
+<!-- datetime -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<script src="<%=request.getContextPath()%>/asset/client/js/bootstrap-datetimepicker.js"></script>
+<script src="<%=request.getContextPath()%>/asset/client/js/moment-with-locales.js"></script>
+<!-- datetime -->
+
 <!-- particle ground -->
 <script src="<%=request.getContextPath()%>/asset/client/js/jquery.particleground.js"></script>
 <!--web-fonts-->
@@ -39,19 +47,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--animation-effect-->
 <link href="<%=request.getContextPath()%>/asset/client/css/animate.min.css" rel="stylesheet"> 
 <script src="<%=request.getContextPath()%>/asset/client/js/wow.min.js"></script>
-	<script>
-	 new WOW().init();
-	</script>
+<script>
+new WOW().init();
+</script>
 <!--//animation-effect-->
 <!--start-smooth-scrolling-->
 <script type="text/javascript" src="<%=request.getContextPath()%>/asset/client/js/move-top.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/asset/client/js/easing.js"></script>	
 <script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-			});
-		});
+jQuery(document).ready(function ($) {
+    $(".scroll").click(function (event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+    });
+});
 </script>
 <!--//end-smooth-scrolling-->

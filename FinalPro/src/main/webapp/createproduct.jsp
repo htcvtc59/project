@@ -12,11 +12,25 @@
 
         <jsp:include page="head.jsp"/>
 
-        <!-- datetime -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
-        <script src="<%=request.getContextPath()%>/asset/client/js/bootstrap-datetimepicker.js"></script>
-        <script src="<%=request.getContextPath()%>/asset/client/js/moment-with-locales.js"></script>
-        <!-- datetime -->
+
+        <script type="text/javascript" src="<%=request.getContextPath()%>/ckplugin/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/ckplugin/ckfinder/ckfinder.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#clickfileImg').on('click', function () {
+                    var finder = new CKFinder();
+                    finder.basePath = '/Upload/';
+                    finder.selectActionFunction = function (url) {
+                        $('#urlimage').val(url);
+                        $('#showimgbtn').html("<img height='80' width='80' src='" + url + "' alt='...' />");
+                    };
+                    finder.popup();
+                });
+
+
+            });
+        </script>
 
     </head>
     <body>
@@ -29,7 +43,7 @@
             <div class="container">
                 <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
                     <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-                    <li class="active">Short Codes</li>
+                    <li class="active">Create Product</li>
                 </ol>
             </div>
         </div>
@@ -80,20 +94,30 @@
                             <label for="inputCity">City</label>
                             <input type="text" class="form-control" id="inputCity">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="inputPhone">Phone Number</label>
                             <input type="text" class="form-control" id="inputPhone">
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="exampleFormControlFile1">Import Image</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <div class="form-group col-md-6">
+                        <label for="clickfileImg">Import Image</label>
+                        <input type="button" class="form-control btn col-md-2" id="clickfileImg" value="Choose File" >
+                        <input type="text" disabled="true" name="txtProImgUrl" id="urlimage" class="form-control col-md-3" />
                     </div>
+                    <div class="form-group col-md-12" id="showimgbtn">
+
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="ckeditordes">Detail</label>
+                        <textarea class="form-control" name="txtProDetail" id="ckeditordes" rows="3"></textarea>
+
+                    </div>
+
 
                     <div class='col-sm-4'>
                         <div class="form-group">
                             <label for="inputDateTimeStart">Datetime Start</label>
-                            <div class='input-group date' id='datetimepicker1'>
+                            <div class='input-group date datetimepicker1'>
                                 <input type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -104,7 +128,7 @@
                     <div class='col-sm-4'>
                         <div class="form-group">
                             <label for="inputDateTimeStart">Datetime End</label>
-                            <div class='input-group date' id='datetimepicker1'>
+                            <div class='input-group date datetimepicker1'>
                                 <input type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -115,7 +139,7 @@
                     <div class='col-sm-4'>
                         <div class="form-group">
                             <label for="inputTime">Time</label>
-                            <div class='input-group date' id='datetimepicker3'>
+                            <div class='input-group date datetimepicker3'>
                                 <input data-format="hh:mm:ss" type='text' class="form-control" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
@@ -123,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class='col-sm-12'><button type="submit" class="btn btn-primary">Sign in</button></div>  
+                    <div class='col-sm-12'><button type="submit" class="btn btn-primary">Create</button></div>  
                 </form>
             </div>
         </div>
@@ -133,5 +157,13 @@
         <jsp:include page="footer.jsp" />
         <!--//footer-->		
         <jsp:include page="jsfooter.jsp"/>
+
+        <script type="text/javascript" >
+
+            var editor = CKEDITOR.replace('ckeditordes');
+            CKFinder.setupCKEditor(editor, '<%=request.getContextPath()%>/ckplugin/ckfinder');
+
+
+        </script>
     </body>
 </html>
