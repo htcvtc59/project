@@ -7,4 +7,7 @@
 * Hiển thi chi tiết trang trên modal view 
 * Bỏ trends 
 * Sửa ảnh nền trang 
+* Đăng ký xác thực google , xác thực email , phone 
+* update info thông tin thẻ thanh toán
+
 
