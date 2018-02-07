@@ -1,8 +1,3 @@
-<%-- 
-    Document   : headermenu
-    Created on : Feb 5, 2018, 10:00:05 PM
-    Author     : apple
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="header">
