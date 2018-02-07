@@ -48,5 +48,13 @@
         <location>/error/page500.jsp</location>
     </error-page>
     
+    <context-param>
+        <param-name>emailuser</param-name>
+        <param-value>osxunixl@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>emailpass</param-name>
+        <param-value>Osxunix97</param-value>
+    </context-param>
     
 </web-app>

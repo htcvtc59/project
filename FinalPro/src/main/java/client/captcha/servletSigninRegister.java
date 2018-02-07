@@ -5,6 +5,7 @@
  */
 package client.captcha;
 
+import client.mail.Mailer;
 import static client.tools.GoogleAuthenticatorDemo.createQRCode;
 import static client.tools.GoogleAuthenticatorDemo.getGoogleAuthenticatorBarCode;
 import static client.tools.GoogleAuthenticatorDemo.getRandomSecretKey;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +37,10 @@ public class servletSigninRegister extends HttpServlet {
             HttpSession session = request.getSession();
             session.removeAttribute("usernameclient");
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+
+        if (action.equals("validateemail")) {
+            System.out.println("validateemail");
         }
 
     }
@@ -140,10 +146,16 @@ public class servletSigninRegister extends HttpServlet {
                     String address = (String) session.getAttribute("address");
 
                     System.out.println(firstname + lastname + email + username + password);
+
+                    ServletContext servletContext = this.getServletContext();
+                    String emailuser = servletContext.getInitParameter("emailuser");
+                    String emailpass = servletContext.getInitParameter("emailpass");
                     
-                    
-                    
-                    
+                    String urljwtemail = "";
+                    String content = Mailer.HtmlContent(urljwtemail, email);
+
+                    Mailer.send(emailuser, emailpass, "htcvtc59@gmail.com", "Confirm Email Auction", "Auction", content);
+                    response.sendRedirect("accountalidatesuccess.jsp");
 
                     session.removeAttribute("firstname");
                     session.removeAttribute("lastname");
@@ -153,7 +165,7 @@ public class servletSigninRegister extends HttpServlet {
                     session.removeAttribute("password_confirm");
                     session.removeAttribute("phone");
                     session.removeAttribute("address");
-                    
+
                 }
             }
 
