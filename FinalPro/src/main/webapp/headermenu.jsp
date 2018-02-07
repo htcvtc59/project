@@ -70,17 +70,10 @@
                 <!--navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav top-nav-info">
-<<<<<<< HEAD
                         <li><a href="index.jsp" class="active">Home</a></li>
-                        <li><a href="products_pending.html" >Product Pending</a></li>
-                        <li><a href="products_doing.html">Product Doing</a></li>
-                        <li><a href="products_done.html" >Product Done</a></li>
-=======
-                        <li><a href="" class="active">Home</a></li>
                         <li><a href="<%=request.getContextPath()%>/products_pending.jsp" >Product Pending</a></li>
                         <li><a href="<%=request.getContextPath()%>/products_doing.jsp">Product Doing</a></li>
                         <li><a href="<%=request.getContextPath()%>/products_done.jsp" >Product Done</a></li>
->>>>>>> 50c77ead62cc29deae8cdf7e2a44a1b3635bc110
                             <%
                                 if (session.getAttribute("usernameclient") == null) {
                             %>
