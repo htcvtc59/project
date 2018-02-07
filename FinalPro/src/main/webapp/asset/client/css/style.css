@@ -3363,6 +3363,9 @@ ul.qty li {
 /*--//responsive-design---*/
 
 /* Modal QuickView */
+.modal-header .close{
+    margin-top: -11px;
+}
 .modal-dialog {
     width: 950px;
 }

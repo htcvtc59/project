@@ -89,9 +89,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g9.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -116,7 +115,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g10.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>
@@ -142,7 +140,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g11.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>
@@ -168,7 +165,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g12.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>
@@ -208,7 +204,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g9.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>
@@ -235,7 +230,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g10.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>
@@ -261,7 +255,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g11.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>
@@ -287,7 +280,6 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g12.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a class="item_add" href=""> Add to cart</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
                             <li><a href="products.html">Show Details </a></li>
                         </ul>

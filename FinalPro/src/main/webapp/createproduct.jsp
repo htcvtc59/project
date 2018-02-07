@@ -59,27 +59,9 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputEmail4">First Name</label>
-                            <input type="text" class="form-control" id="inputFirstname" placeholder="Firstname">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputLastname">Last Name</label>
-                            <input type="text" class="form-control" id="inputLastname" placeholder="Lastname">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                        </div>
-                        <div class="form-group col-md-6">
                             <label for="inputProductName">Product Name</label>
                             <input type="text" class="form-control" id="inputProductName" placeholder="Product Name">
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Please Address">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputPrice">Price Start</label>
@@ -88,16 +70,6 @@
                     <div class="form-group col-md-3">
                         <label for="inputQuatity">Quatity</label>
                         <input type="text" class="form-control" id="inputQuatity" placeholder="Product Quatity">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputPhone">Phone Number</label>
-                            <input type="text" class="form-control" id="inputPhone">
-                        </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="clickfileImg">Import Image</label>
