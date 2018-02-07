@@ -3363,6 +3363,31 @@ ul.qty li {
 /*--//responsive-design---*/
 
 /* Modal QuickView */
+.modal-dialog {
+    width: 950px;
+}
+.modal_body_right h4{
+	font-size:1.6em;
+    color:#ff9b05;
+    text-transform: capitalize;
+}
+.modal_body_right p{
+	margin:2em 0;
+	line-height:1.8em;
+	color:#999;
+	font-size: 14px !important;
+}
+.modal_body_right_cart p {
+    font-size: 1.2em !important;
+    color: #212121;
+	margin: 0em 0 1em !important;
+}
+.modal_body_right h5{
+	font-size: 1em;
+    color: #212121;
+    margin: 3em 0 1em;
+}
+
 .simpleCart_shelfItem p{
     font-size: 1.2em;
     color: #212121;
@@ -3393,6 +3418,9 @@ ul.qty li {
     background:#ff9b05;
     color:#fff;
     border:1px solid #ff9b05;
+}
+.price{
+    margin-bottom: 10px;
 }
 
 /* Modal QuickView */

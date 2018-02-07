@@ -40,8 +40,8 @@
         <div class="container">
             <div class="nav navbar-nav header-two-left">
                 <ul>
-                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 892</li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">mail@example.com</a></li>			
+                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+84 66666 6789</li>
+                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">auction_master@fpt.edu.vn</a></li>			
                 </ul>
             </div>
             <div class="nav navbar-nav logo wow zoomIn animated" data-wow-delay=".7s">
@@ -50,16 +50,6 @@
             <div class="nav navbar-nav navbar-right header-two-right">
                 <div class="header-right my-account">
                     <a href="contact.html"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> CONTACT US</a>						
-                </div>
-                <div class="header-right cart">
-                    <a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                    <h4><a href="checkout.html">
-                            <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>) 
-                        </a></h4>
-                    <div class="cart-box">
-                        <p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-                        <div class="clearfix"> </div>
-                    </div>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -80,10 +70,10 @@
                 <!--navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav top-nav-info">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="products_pending.html" >Product Pending</a></li>
-                        <li><a href="products_doing.html">Product Doing</a></li>
-                        <li><a href="products_done.html" >Product Done</a></li>
+                        <li><a href="" class="active">Home</a></li>
+                        <li><a href="<%=request.getContextPath()%>/products_pending.jsp" >Product Pending</a></li>
+                        <li><a href="<%=request.getContextPath()%>/products_doing.jsp">Product Doing</a></li>
+                        <li><a href="<%=request.getContextPath()%>/products_done.jsp" >Product Done</a></li>
                             <%
                                 if (session.getAttribute("usernameclient") == null) {
                             %>
