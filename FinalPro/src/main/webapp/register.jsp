@@ -24,27 +24,36 @@
         <!--//breadcrumbs-->
 
         <!--login-->
-	<div class="login-page">
-		<div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
-			<h3 class="title">Register<span> Form</span></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
-		</div>
-		<div class="widget-shadow">
-			<div class="login-top wow fadeInUp animated" data-wow-delay=".7s">
-				<h4>Already have an Account ?<a href="signin.jsp">  Sign In »</a> </h4>
-			</div>
-			<div class="login-body">
-				<form class="wow fadeInUp animated" data-wow-delay=".7s">
-					<input type="text" placeholder="First Name" required="">
-					<input type="text" placeholder="Last Name" required="">
-					<input type="text" class="email" placeholder="Email Address" required="">
-					<input type="password" name="password" class="lock" placeholder="Password">
-					<input type="submit" name="Register" value="Register">
-				</form>
-			</div>
-		</div>
-	</div>
-	<!--//login-->
+        <div class="login-page">
+            <div class="title-info wow fadeInUp animated" data-wow-delay=".5s">
+                <h3 class="title">Register<span> Form</span></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit curabitur </p>
+            </div>
+            <div class="widget-shadow">
+                <div class="login-top wow fadeInUp animated" data-wow-delay=".7s">
+                    <h4>Already have an Account ?<a href="signin.jsp">  Sign In »</a> </h4>
+                </div>
+                <div class="login-body">
+                    <form method="POST" action="/register?action=register" class="wow fadeInUp animated" data-wow-delay=".7s">
+                        <input type="text" placeholder="First Name">
+                        <input type="text" placeholder="Last Name" >
+                        <input type="text" name="email" class="email" placeholder="Email Address" required="">
+                        <input type="password" name="password" class="lock" placeholder="Password">
+                        <input type="submit" value="Register">
+                    </form>
+                    <%
+                        if (request.getAttribute("qrCodePath") != null) {
+                            String qr = (String) request.getAttribute("qrCodePath");
+                    %>
+                    <img src="<%=request.getContextPath()%>/2fa-qr-code.png" height="100" width="100" />
+
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+        </div>
+        <!--//login-->
 
         <!--footer-->
         <jsp:include page="footer.jsp" />

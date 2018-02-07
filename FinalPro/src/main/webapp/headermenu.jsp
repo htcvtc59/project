@@ -17,7 +17,7 @@
                 } else {
                 %>
                 <!-- Logout    -->
-                <p>Welcome to <a href="register?action=register">Đăng xuất</a></p>
+                <p>Welcome to <a href="signin?action=logout">Đăng xuất</a></p>
                 <%
                     }
                 %>
@@ -80,7 +80,7 @@
                 <!--navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav top-nav-info">
-                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="index.jsp" class="active">Home</a></li>
                         <li><a href="products_pending.html" >Product Pending</a></li>
                         <li><a href="products_doing.html">Product Doing</a></li>
                         <li><a href="products_done.html" >Product Done</a></li>
