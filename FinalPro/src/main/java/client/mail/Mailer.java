@@ -19,9 +19,8 @@ public class Mailer {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
         //get Session   
-        Session session = Session.getDefaultInstance(props,
+        Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(from, password);
             }
@@ -36,6 +35,7 @@ public class Mailer {
             System.setProperty("mail.mime.charset", "utf8");
             //send message  
             Transport.send(message);
+
             System.out.println("message sent successfully");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -81,6 +81,13 @@ public class Mailer {
         content = content.replace("hello@SmilesDavis.yeah", email);
 
         return content;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(Mailer.HtmlContent("http://localhost:8080/register?action=validateemail&email=htcvtc59@gmail.com&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoMCJ9.BWxUhDyugLEXappvduqiTTxke44HkTSG2I7CPTNS5vg", "htcvtc59@gmail.com"));
+        Mailer.send("osxunixl@gmail.com", "Osxunix97", "htcvtc59@gmail.com", "Confirm Email Auction", "Auction", Mailer.HtmlContent("http://localhost:8080/register?action=validateemail&email=htcvtc59@gmail.com&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoMCJ9.BWxUhDyugLEXappvduqiTTxke44HkTSG2I7CPTNS5vg", "htcvtc59@gmail.com"));
+
     }
 
 }

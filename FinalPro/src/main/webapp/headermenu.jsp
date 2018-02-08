@@ -12,7 +12,7 @@
                 } else {
                 %>
                 <!-- Logout    -->
-                <p>Welcome to <a href="signin?action=logout">Đăng xuất</a></p>
+                <p>Welcome to <%=session.getAttribute("usernameclient")%><a href="signin?action=logout">Logout</a></p>
                 <%
                     }
                 %>
@@ -72,7 +72,7 @@
                             <%
                                 if (session.getAttribute("usernameclient") == null) {
                             %>
-                        <li><a href="#" data-toggle="modal" data-target="#modalCreate" disabled >Create Product</a></li> <%
+                        <li><a href="#" disabled >Create Product</a></li> <%
                         } else {
                             %>
                         <li><a href="createproduct.jsp">Create Product</a></li>
@@ -92,23 +92,6 @@
                 </div>
                 <!--//navbar-header-->
             </nav>
-            <div class="modal video-modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modalCreate">
-                <div class='modal-dialog'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                            <button type='button' class='close' data-dismiss='modal'>&times;</button>
-                        </div>
-
-                        <div class='modal-body alert-warning'>
-                            Please Sign In or Register for Auction price !!!
-                        </div>
-                        <div class='modal-footer'>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div id="cd-search" class="cd-search">
                 <form>
                     <input type="search" placeholder="Search...">
