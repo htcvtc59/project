@@ -3,18 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.captcha;
+package client.controller;
 
+import admin.connectdb.dbs;
+import client.captcha.VerifyRecaptcha;
 import client.mail.Mailer;
-import static client.tools.GoogleAuthenticatorDemo.createQRCode;
 import static client.tools.GoogleAuthenticatorDemo.getGoogleAuthenticatorBarCode;
 import static client.tools.GoogleAuthenticatorDemo.getRandomSecretKey;
 import static client.tools.GoogleAuthenticatorDemo.getTOTPCode;
-import com.google.zxing.WriterException;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.mongodb.BasicDBObject;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.UnsupportedEncodingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +27,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.bson.BsonDouble;
+import org.bson.BsonInt32;
+import org.bson.BsonString;
+import org.bson.Document;
 
 @WebServlet(name = "servletSigninRegister", urlPatterns = {"/signin", "/register"})
 public class servletSigninRegister extends HttpServlet {
@@ -39,8 +48,27 @@ public class servletSigninRegister extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
-        if (action.equals("validateemail")) {
-            System.out.println("validateemail");
+        if (action.equals("validateemail") && request.getParameter("jwt") != null
+                && request.getParameter("email") != null) {
+
+            try {
+                DecodedJWT jwt = JWT.decode(request.getParameter("jwt"));
+
+                //update confirm email oke
+                BasicDBObject doc = new BasicDBObject();
+                doc.append("$set", new BasicDBObject()
+                        .append("email", new BasicDBObject("status", new BsonInt32(1))));
+
+                new dbs().getcolclient.updateOne(new BasicDBObject()
+                        .append("email", new BasicDBObject("name", request.getParameter("email"))), doc);
+
+                request.getRequestDispatcher("accountalidateoke.jsp").forward(request, response);
+
+            } catch (JWTDecodeException exception) {
+                //Invalid token
+                request.getRequestDispatcher("accountalidatefail.jsp").forward(request, response);
+
+            }
         }
 
     }
@@ -50,7 +78,6 @@ public class servletSigninRegister extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        System.out.println(action);
 
         if (action.equals("signin")) {
 
@@ -134,7 +161,6 @@ public class servletSigninRegister extends HttpServlet {
             if (code != null) {
                 String codes = getTOTPCode(secretKey);
                 if (code.equals(codes)) {
-                    System.out.println(code + "true");
                     HttpSession session = request.getSession();
                     String firstname = (String) session.getAttribute("firstname");
                     String lastname = (String) session.getAttribute("lastname");
@@ -145,17 +171,49 @@ public class servletSigninRegister extends HttpServlet {
                     String phone = (String) session.getAttribute("phone");
                     String address = (String) session.getAttribute("address");
 
-                    System.out.println(firstname + lastname + email + username + password);
+//                  Insert data to db
+                    
+                    Document doc = new Document("name", new BsonString(firstname + " " + lastname))
+                            .append("username", new BsonString(username))
+                            .append("password", new BsonString(password))
+                            .append("phone",
+                                    new Document("name", new BsonString(phone))
+                                            .append("status", new BsonInt32(0)))
+                            .append("email",
+                                    new Document("name", new BsonString(email))
+                                            .append("status", new BsonInt32(0)))
+                            .append("address", new BsonString(address))
+                            .append("option",
+                                    new Document("idaccount", new BsonString(""))
+                                            .append("idcard", new BsonString(""))
+                                            .append("money", new BsonDouble(0.0)))
+                            .append("status", new BsonInt32(1));
+                    new dbs().getcolclient.insertOne(doc);
+                    System.out.println(doc.toJson());
 
+//                  Send Mail validation
                     ServletContext servletContext = this.getServletContext();
                     String emailuser = servletContext.getInitParameter("emailuser");
                     String emailpass = servletContext.getInitParameter("emailpass");
-                    
-                    String urljwtemail = "";
+
+                    String urljwtemail = "http://localhost:8080/register?action=validateemail&email=" + email + "&jwt=";
+
+                    try {
+                        Algorithm algorithm = Algorithm.HMAC256(email);
+                        urljwtemail += JWT.create()
+                                .withIssuer("auth0")
+                                .sign(algorithm);
+
+                    } catch (UnsupportedEncodingException exception) {
+                        //UTF-8 encoding not supported
+                    } catch (JWTCreationException exception) {
+                        //Invalid Signing configuration / Couldn't convert Claims.
+                    }
+
+                    System.out.println(urljwtemail + "tokencode");
                     String content = Mailer.HtmlContent(urljwtemail, email);
 
-                    Mailer.send(emailuser, emailpass, "htcvtc59@gmail.com", "Confirm Email Auction", "Auction", content);
-                    response.sendRedirect("accountalidatesuccess.jsp");
+                    Mailer.send(emailuser, emailpass, email, "Confirm Email Auction", "Auction", content);
 
                     session.removeAttribute("firstname");
                     session.removeAttribute("lastname");
@@ -166,6 +224,14 @@ public class servletSigninRegister extends HttpServlet {
                     session.removeAttribute("phone");
                     session.removeAttribute("address");
 
+                    request.getRequestDispatcher("accountalidatesuccess.jsp").forward(request, response);
+
+                } else {
+                    HttpSession session = request.getSession();
+                    String email = (String) session.getAttribute("email");
+                    String barCode = getGoogleAuthenticatorBarCode(secretKey, email, "Company");
+                    request.setAttribute("barCode", barCode);
+                    request.getRequestDispatcher("accountalidatevqr.jsp").forward(request, response);
                 }
             }
 

@@ -35,7 +35,7 @@
                     <h4>Already have an Account ?<a href="signin.jsp">  Sign In »</a> </h4>
                 </div>
                 <div class="login-body">
-                    <h3>Register Success</h3>
+                   <h3>Register Success , Please Check Email</h3>
                     <h3><a href="index.jsp">Back to Home </a></h3>
                 </div>
             </div>
