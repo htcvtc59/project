@@ -3363,6 +3363,9 @@ ul.qty li {
 /*--//responsive-design---*/
 
 /* Modal QuickView */
+.modal-header .close{
+    margin-top: -11px;
+}
 .modal-dialog {
     width: 950px;
 }
@@ -3425,3 +3428,30 @@ ul.qty li {
 
 /* Modal QuickView */
 
+/* image thumbai */
+#thumbs { padding-top: 10px; overflow: hidden; }
+#thumbs img, #largeImage {
+   border: 1px solid gray;
+   padding: 4px;
+   background-color: white;
+   cursor: pointer;
+}
+#thumbs img {
+   width: 75px;
+   height: 75px;
+   float: left;
+   margin-right: 6px;
+}
+#description {
+   background: black;
+   color: white;
+   position: absolute;
+   bottom: 0;
+   padding: 10px 20px;
+   width: 525px;
+   margin: 5px;
+}
+#panel {
+    position: relative;
+}
+/* image thumbai */
