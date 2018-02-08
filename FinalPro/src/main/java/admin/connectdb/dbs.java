@@ -6,9 +6,11 @@ import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
 import com.mongodb.client.model.UpdateOptions;
+import static com.mongodb.client.model.Updates.*;
 import java.sql.DatabaseMetaData;
 import org.bson.BsonDouble;
 import org.bson.BsonInt32;
@@ -18,7 +20,7 @@ import org.bson.types.ObjectId;
 
 public class dbs {
 
-    MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27018/finaldb");
+    MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017/finaldb");
     MongoClient mongoClient = new MongoClient(connectionString);
     MongoDatabase database = mongoClient.getDatabase("finaldb");
     public MongoCollection getcoladmin = database.getCollection("coladmin");
@@ -35,23 +37,18 @@ public class dbs {
 //
 //        Document findOneAndUpdate = (Document) new dbs().getcoladmin.findOneAndUpdate(bdboid, bObject, new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER));
 //        System.out.println(findOneAndUpdate.toJson() + "-----");
+//        new dbs().getcolclient.updateOne(eq("email.name", "htcvtc59@gmail.com"),
+//                 combine(set("email.status", 1)), new UpdateOptions().upsert(true)
+//                .bypassDocumentValidation(true));
+
+        MongoCursor<Document> iterator = new dbs().getcolclient
+                .find(and(eq("username", "anh"), eq("password", "13")))
+                .iterator();
         
-        Document doc = new Document("name", new BsonString("firstname" + " " + "lastname"))
-                            .append("username", new BsonString("username"))
-                            .append("password", new BsonString("password"))
-                            .append("phone",
-                                    new Document("name", new BsonString("phone"))
-                                            .append("status", new BsonInt32(0)))
-                            .append("email",
-                                    new Document("name", new BsonString("email"))
-                                            .append("status", new BsonInt32(0)))
-                            .append("address", new BsonString("address"))
-                            .append("option",
-                                    new Document("idaccount", new BsonString(""))
-                                            .append("idcard", new BsonString(""))
-                                            .append("money", new BsonDouble(0.0)))
-                            .append("status", new BsonInt32(1));
-                    new dbs().getcolclient.insertOne(doc);
+        System.out.println(iterator.hasNext());
+
+               
+
     }
 
 }

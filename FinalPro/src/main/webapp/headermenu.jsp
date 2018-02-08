@@ -12,7 +12,7 @@
                 } else {
                 %>
                 <!-- Logout    -->
-                <p>Welcome to <a href="signin?action=logout">Đăng xuất</a></p>
+                <p>Welcome to <%=session.getAttribute("usernameclient")%><a href="signin?action=logout">Logout</a></p>
                 <%
                     }
                 %>

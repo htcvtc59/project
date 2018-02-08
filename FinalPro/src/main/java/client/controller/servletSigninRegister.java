@@ -17,6 +17,12 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.UpdateOptions;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -55,12 +61,9 @@ public class servletSigninRegister extends HttpServlet {
                 DecodedJWT jwt = JWT.decode(request.getParameter("jwt"));
 
                 //update confirm email oke
-                BasicDBObject doc = new BasicDBObject();
-                doc.append("$set", new BasicDBObject()
-                        .append("email", new BasicDBObject("status", new BsonInt32(1))));
-
-                new dbs().getcolclient.updateOne(new BasicDBObject()
-                        .append("email", new BasicDBObject("name", request.getParameter("email"))), doc);
+                new dbs().getcolclient.updateOne(eq("email.name", request.getParameter("email")),
+                        combine(set("email.status", 1)), new UpdateOptions().upsert(true)
+                        .bypassDocumentValidation(true));
 
                 request.getRequestDispatcher("accountalidateoke.jsp").forward(request, response);
 
@@ -89,8 +92,12 @@ public class servletSigninRegister extends HttpServlet {
             boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
             if (verify && user != null && pass != null) {
-
-                if (user.equals("admin") && pass.equals("admin")) {
+                // Check login client
+                MongoCursor<Document> cursor = new dbs().getcolclient
+                        .find(and(eq("username", user), eq("password", pass)))
+                        .iterator();
+                
+                if (cursor.hasNext()) {
                     HttpSession session = request.getSession();
                     session.setAttribute("usernameclient", user);
 
@@ -172,7 +179,6 @@ public class servletSigninRegister extends HttpServlet {
                     String address = (String) session.getAttribute("address");
 
 //                  Insert data to db
-                    
                     Document doc = new Document("name", new BsonString(firstname + " " + lastname))
                             .append("username", new BsonString(username))
                             .append("password", new BsonString(password))
