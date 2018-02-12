@@ -1596,8 +1596,7 @@ h4.panel-title a {
 /*--//login-page--*/
 /*--contact--*/
 .address {
-    background: url(../images/1.jpg)no-repeat;
-    background-size: cover;
+    background: #33414e;
     padding: 5em 0;
 }
 .address-grid {

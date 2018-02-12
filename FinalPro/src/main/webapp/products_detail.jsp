@@ -281,6 +281,9 @@
                 <!--//related-products-->
             </div>
         </div>
-        <!--//single-page-->
+        <!--footer-->
+        <jsp:include page="footer.jsp" />
+        <!--//footer-->		
+        <jsp:include page="jsfooter.jsp"/>
     </body>
 </html>

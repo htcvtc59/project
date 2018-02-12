@@ -272,6 +272,10 @@
 			</div>
 	</div>
 	<!--//products-->
+        <!--footer-->
+        <jsp:include page="footer.jsp" />
+        <!--//footer-->		
+        <jsp:include page="jsfooter.jsp"/>
     </body>
 </html>
 
