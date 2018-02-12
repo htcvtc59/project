@@ -39,20 +39,6 @@
                 <div class="col-sm-7 banner-right wow fadeInRight animated clearTop" data-wow-delay=".5s">			
                     <section class="slider grid">
                         <div class="flexslider">
-                            <ul class="slides">
-                                <li>
-                                    <h4>-30%</h4>
-                                    <img src="<%=request.getContextPath()%>/asset/client/images/b1.png" alt="">
-                                </li>
-                                <li>
-                                    <h4>-25%</h4>
-                                    <img src="<%=request.getContextPath()%>/asset/client/images/b2.png" alt="">
-                                </li>
-                                <li>
-                                    <h4>-32%</h4>
-                                    <img src="<%=request.getContextPath()%>/asset/client/images/b3.png" alt="">
-                                </li>
-                            </ul>
                         </div>
                     </section>
                     <!--FlexSlider-->

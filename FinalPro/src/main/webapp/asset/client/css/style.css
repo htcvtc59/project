@@ -541,12 +541,12 @@ ul.multi-column-dropdown:nth-child(3) {
 }
 .banner {
     background: #33414e;
-	background:url(../images/1.jpg)no-repeat 0px 0px;
-	background-size:cover;
+/*	background:url(../images/1.jpg)no-repeat 0px 0px;
+	background-size:cover;*/
 }
 .banner-right{
-	background:url(../images/img3.jpg)no-repeat 0px 0px;
-	background-size:cover;
+	background:url(../images/header.jpg)no-repeat 0px -92px;
+	/*background-size:cover;*/
 	min-height:300px;
 	padding-top: 2em;
 }
