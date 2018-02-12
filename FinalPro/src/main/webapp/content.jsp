@@ -76,7 +76,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -242,7 +242,7 @@
                     <div class="new-text">
                         <ul>  
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="products.html">Show Details </a></li>
+                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
                         </ul>
                     </div>
                 </div>

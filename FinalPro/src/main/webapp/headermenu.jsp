@@ -1,3 +1,8 @@
+<%-- 
+    Document   : headermenu
+    Created on : Feb 5, 2018, 10:00:05 PM
+    Author     : apple
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="header">
@@ -12,7 +17,7 @@
                 } else {
                 %>
                 <!-- Logout    -->
-                <p>Welcome to <%=session.getAttribute("usernameclient")%><a href="signin?action=logout">Logout</a></p>
+                <p>Welcome to <a href="register?action=register">Đăng xuất</a></p>
                 <%
                     }
                 %>
@@ -65,14 +70,14 @@
                 <!--navbar-header-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav top-nav-info">
-                        <li><a href="index.jsp" class="active">Home</a></li>
+                        <li><a href="" class="active">Home</a></li>
                         <li><a href="<%=request.getContextPath()%>/products_pending.jsp" >Product Pending</a></li>
                         <li><a href="<%=request.getContextPath()%>/products_doing.jsp">Product Doing</a></li>
                         <li><a href="<%=request.getContextPath()%>/products_done.jsp" >Product Done</a></li>
                             <%
                                 if (session.getAttribute("usernameclient") == null) {
                             %>
-                        <li><a href="#" disabled >Create Product</a></li> <%
+                        <li><a href="#" data-toggle="modal" data-target="#modalCreate" disabled >Create Product</a></li> <%
                         } else {
                             %>
                         <li><a href="createproduct.jsp">Create Product</a></li>
@@ -92,6 +97,23 @@
                 </div>
                 <!--//navbar-header-->
             </nav>
+            <div class="modal video-modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modalCreate">
+                <div class='modal-dialog'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                        </div>
+
+                        <div class='modal-body alert-warning'>
+                            Please Sign In or Register for Auction price !!!
+                        </div>
+                        <div class='modal-footer'>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="cd-search" class="cd-search">
                 <form>
                     <input type="search" placeholder="Search...">

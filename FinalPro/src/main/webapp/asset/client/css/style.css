@@ -3422,6 +3422,9 @@ ul.qty li {
 .price{
     margin-bottom: 10px;
 }
+.modal-header .close{
+   margin-top: -11px;
+}
 
 /* Modal QuickView */
 
