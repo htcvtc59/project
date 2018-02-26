@@ -28,6 +28,7 @@
 			<div class="col-md-12 product-model-sec">
 				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
                                     <span class="time-request" style="color: red;">Done</span>
+                                    <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g1.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -55,6 +56,7 @@
 				</div>
 				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g5.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -82,6 +84,7 @@
 				</div>
 				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".9s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g7.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -109,6 +112,7 @@
 				</div>
 				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g3.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -136,6 +140,7 @@
 				</div>
 				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g6.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -163,6 +168,7 @@
 				</div>
 				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".9s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g2.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -190,6 +196,7 @@
 				</div>
 				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".5s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g8.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -217,6 +224,7 @@
 				</div>
 				<div class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".7s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g10.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
@@ -244,6 +252,7 @@
 				</div>
 				<div class="product-grids simpleCart_shelfItem wow fadeInUp animated" data-wow-delay=".9s">
 				<span class="time-request" style="color: red;">Done</span>
+                                <span class="date-request">01:02:00</span>
 					<div class="new-top">
 						<a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g12.jpg" class="img-responsive" alt=""/></a>
 						<div class="new-text">
