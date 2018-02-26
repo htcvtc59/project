@@ -120,8 +120,8 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>Id</th>
-                                                    <th>Username</th>
-                                                    <th>Password</th>
+                                                    <th>username</th>
+                                                    <th>password</th>
                                                 </tr>
                                             </thead>
 

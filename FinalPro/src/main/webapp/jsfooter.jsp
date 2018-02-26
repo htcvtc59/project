@@ -12,7 +12,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.datetimepicker1').datetimepicker({
-            format:"DD/MM/YYYY hh:mm:ss a"
+            format:"DD/MM/YYYY HH:mm:ss a"
         });
         $('.datetimepicker3').datetimepicker({
             format: "hh:mm:ss",

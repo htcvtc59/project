@@ -29,11 +29,11 @@
 
 }
 .flex-control-nav {
-  position: absolute;
+    position: absolute;
     bottom: auto;
     text-align: center;
-    left:-21%;
-    top: 0;
+    left:-25%;
+    bottom: 0;
     width: 24%;
 }
 ul.flex-direction-nav {

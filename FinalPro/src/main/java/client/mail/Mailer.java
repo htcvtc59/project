@@ -46,7 +46,7 @@ public class Mailer {
     public static String HtmlContentCart(String name, String email, String phone, String subject, String msg) {
         StringBuilder contentBuilder = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("/Users/apple/NetBeansProjects/FinalPro/src/main/webapp/confirmemail.html"));
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\osx\\Desktop\\Project\\FinalPro\\src\\main\\webapp\\confirmemail.html"));
             String str;
             while ((str = in.readLine()) != null) {
                 contentBuilder.append(str);
@@ -67,7 +67,7 @@ public class Mailer {
 
         StringBuilder contentBuilder = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("/Users/apple/NetBeansProjects/FinalPro/src/main/webapp/confirmemail.html"));
+            BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\osx\\Desktop\\Project\\FinalPro\\src\\main\\webapp\\confirmemail.html"));
             String str;
             while ((str = in.readLine()) != null) {
                 contentBuilder.append(str);

@@ -94,12 +94,13 @@ public class servletSigninRegister extends HttpServlet {
             if (verify && user != null && pass != null) {
                 // Check login client
                 MongoCursor<Document> cursor = new dbs().getcolclient
-                        .find(and(eq("username", user), eq("password", pass)))
+                        .find(and(eq("username", user), eq("password", pass),eq("status",1)))
                         .iterator();
                 
                 if (cursor.hasNext()) {
                     HttpSession session = request.getSession();
                     session.setAttribute("usernameclient", user);
+                    session.setAttribute("objclient", cursor.next().toJson());
 
                     response.sendRedirect("index.jsp");
                 } else {
@@ -202,7 +203,7 @@ public class servletSigninRegister extends HttpServlet {
                     String emailuser = servletContext.getInitParameter("emailuser");
                     String emailpass = servletContext.getInitParameter("emailpass");
 
-                    String urljwtemail = "http://localhost:8080/register?action=validateemail&email=" + email + "&jwt=";
+                    String urljwtemail = "http://localhost:8084/register?action=validateemail&email=" + email + "&jwt=";
 
                     try {
                         Algorithm algorithm = Algorithm.HMAC256(email);
