@@ -76,7 +76,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -242,7 +242,7 @@
                     <div class="new-text">
                         <ul>  
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
                     <div class="new-text">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -406,7 +406,9 @@
                         </div>
                         <div class="input-group modal_body_right_cart simpleCart_shelfItem">
                             <span style="margin: 10xp;" class="time-request">01:02:00</span>
-                            <p><span>$320</span> <i class="item_price">$250</i></p>
+                            <span style="left:100px;" class="date-request">18:00 - 26/-2/2018</span>
+                            <p><span>Price Start</span> <i class="item_price">$250</i></p>
+                            <p><span>Price Min</span> <i class="item_price">$250</i></p>
                             <input style="margin-bottom: 10px;" type="text" class="price form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2">
                             <p><a class="item_add" href="#modalUser" data-toggle="modal" data-target="#list-user">Aution now</a></p>
                         </div>

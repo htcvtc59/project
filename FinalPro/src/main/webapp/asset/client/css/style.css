@@ -3405,12 +3405,9 @@ h2.typoh2{
     margin: 0.5em 0 1em;
     font-weight: 600;
 }
-.simpleCart_shelfItem p span{
-    color: #999;
-    font-size: .8em;
-    text-decoration: line-through;
-    padding-right: 1em;
-    font-weight: 300;
+.simpleCart_shelfItem p i{
+    color:red;
+    margin-left: 20px;
 }
 .agile_ecommerce_tab_left p i{
     font-style:normal;
