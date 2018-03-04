@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--banner-->
-
 <div class="banner">
     <div id="particles">
         <div id="intro">
@@ -61,6 +60,7 @@
     </div>
 </div>		
 <!--//banner-->
+
 <!--new-->
 <div class="new">
     <div class="container">
@@ -75,8 +75,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g9.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -101,8 +101,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g10.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -126,8 +126,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g11.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -151,8 +151,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g12.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -190,8 +190,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g9.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -216,8 +216,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g10.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -241,8 +241,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g11.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>  
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -266,8 +266,8 @@
                     <a href="single.html"><img src="<%=request.getContextPath()%>/asset/client/images/g12.jpg" class="img-responsive" alt=""/></a>
                     <div class="new-text">
                         <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#myModal6">Quick View</a></li>
-                            <li><a href="<%=request.getContextPath()%>/products_detail.jsp">Show Details </a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Quick View</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -291,75 +291,6 @@
     </div>
 </div>
 <!--//gallery-->
-
-<!-- Modal -->
-<div class="modal video-modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModal6">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-            </div>
-            <section>
-                <div class="modal-body">
-                    <div id="gallery" class="col-md-5 modal_body_left">
-                        <div id="panel">
-                            <img width="365px" height="460px" id="largeImage" src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" />
-                        </div>
-                        <div id="thumbs">
-                            <img src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" alt="1st image description" />
-                            <img src="<%=request.getContextPath()%>/asset/client/images/s2.jpg" alt="2nd image description" />
-                            <img src="<%=request.getContextPath()%>/asset/client/images/s3.jpg" alt="3rd image description" />
-                        </div>
-                    </div>
-                    <script type="text/javascript">
-                        $('#thumbs img').click(function () {
-                            $('#largeImage').attr('src', $(this).attr('src').replace('thumb', 'large'));
-                            $('#description').html($(this).attr('alt'));
-                        });
-                    </script>
-                    <div class="col-md-7 modal_body_right">
-                        <h4>a good look women's Long Skirt</h4>
-                        <p>Ut enim ad minim veniam, quis nostrud 
-                            exercitation ullamco laboris nisi ut aliquip ex ea 
-                            commodo consequat.Duis aute irure dolor in 
-                            reprehenderit in voluptate velit esse cillum dolore 
-                            eu fugiat nulla pariatur. Excepteur sint occaecat 
-                            cupidatat non proident, sunt in culpa qui officia 
-                            deserunt mollit anim id est laborum.</p>
-                        <div class="rating">
-                            <div class="rating-left">
-                                <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="rating-left">
-                                <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="rating-left">
-                                <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="rating-left">
-                                <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="rating-left">
-                                <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="input-group modal_body_right_cart simpleCart_shelfItem">
-                            <span style="margin: 10xp;" class="time-request">01:02:00</span>
-                            <p><span>$320</span> <i class="item_price">$250</i></p>
-                            <input style="margin-bottom: 10px;" type="text" class="price form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2">
-                            <p><a class="item_add" href="#">Aution now</a></p>
-                        </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-            </section>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-
 
 <!--trend-->
 <div class="trend wow zoomIn animated" data-wow-delay=".5s">
@@ -419,3 +350,158 @@
     </div>
 </div>
 <!--//trend-->
+
+
+<!-- Button trigger modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Product View</h4>
+            </div>
+            <!-- START OF MODAL BODY-->
+            <section>
+                <div class="modal-body">
+                    <div id="gallery" class="col-md-5 modal_body_left">
+                        <div id="panel">
+                            <img width="365px" height="460px" id="largeImage" src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" />
+                        </div>
+                        <div id="thumbs">
+                            <img src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" alt="1st image description" />
+                            <img src="<%=request.getContextPath()%>/asset/client/images/s2.jpg" alt="2nd image description" />
+                            <img src="<%=request.getContextPath()%>/asset/client/images/s3.jpg" alt="3rd image description" />
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $('#thumbs img').click(function () {
+                            $('#largeImage').attr('src', $(this).attr('src').replace('thumb', 'large'));
+                            $('#description').html($(this).attr('alt'));
+                        });
+                    </script>
+                    <div class="col-md-7 modal_body_right">
+                        <h4>a good look women's Long Skirt</h4>
+                        <p>Ut enim ad minim veniam, quis nostrud 
+                            exercitation ullamco laboris nisi ut aliquip ex ea 
+                            commodo consequat.Duis aute irure dolor in 
+                            reprehenderit in voluptate velit esse cillum dolore 
+                            eu fugiat nulla pariatur. Excepteur sint occaecat 
+                            cupidatat non proident, sunt in culpa qui officia 
+                            deserunt mollit anim id est laborum.</p>
+                        <div class="rating">
+                            <div class="rating-left">
+                                <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="rating-left">
+                                <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="rating-left">
+                                <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="rating-left">
+                                <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="rating-left">
+                                <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="input-group modal_body_right_cart simpleCart_shelfItem">
+                            <span style="margin: 10xp;" class="time-request">01:02:00</span>
+                            <span style="left:100px;" class="date-request">18:00 - 26/-2/2018</span>
+                            <p><span>Price Start</span> <i class="item_price">$250</i></p>
+                            <p><span>Price Min</span> <i class="item_price">$250</i></p>
+                            <input style="margin-bottom: 10px;" type="text" class="price form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2">
+                            <p><a class="item_add" href="#modalUser" data-toggle="modal" data-target="#list-user">Aution now</a></p>
+
+
+                            <div class="col-7 contentscollbar table-homeau-content">
+                                <table class="table table-responsive-sm table-sm table-striped">
+                                    <thead >
+                                        <tr>
+                                            <th style="font-weight: normal;" scope="col">List User Aution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="buy_content_value">
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Tuấn Anh</td>
+                                            <td>100</td>
+                                            <td>3/1/2018</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"> </div>
+                </div>
+            </section>
+
+            <!-- END OF APPLICATION FORM MODAL BODY -->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+
+   
+</div>
+
+<!--<script type="text/javascript">
+    $('#listViewCancel').click(function () {
+        $('#list-user').modal('toggle');
+    });
+</script>-->
+
+ <!--Modal for uploading photo-->
+<!-- <div class="modal" id="list-user" tabindex="-1" role="dialog" aria-labelledby="list-user-title" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <h4 class="modal-title" id="list-user-title">List User Aution</h4>
+             </div>
+             <div class="modal-body">
+                 <p>Nguyễn Tuấn Anh</p>
+                 <p>Đinh Văn Trơn</p>
+                 <p>Trần Quang Khải</p>
+             </div>
+             <div class="modal-footer">
+                 <button id="listViewCancel" type="button" class="btn btn-default">Close</button>
+             </div>
+         </div> /.modal-content 
+     </div> /.modal-dialog 
+ </div>-->

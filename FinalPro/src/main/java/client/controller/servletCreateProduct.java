@@ -72,7 +72,7 @@ public class servletCreateProduct extends HttpServlet {
                 String clientid = jobjid.get("$oid").getAsString();
 
                 SimpleDateFormat sdFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a", Locale.getDefault());
-
+                
                 try {
                     System.out.println(sdFormat.parse(protimestart));
                     Document d = new Document("nameproduct", proname).append("idcategory", "")

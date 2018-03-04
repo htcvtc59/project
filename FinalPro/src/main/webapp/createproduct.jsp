@@ -1,10 +1,11 @@
-<%-- 
-    Document   : createproduct
-    Created on : Feb 5, 2018, 10:02:59 PM
-    Author     : apple
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+                    if(session.getAttribute("usernameclient")==null){
+                        response.sendRedirect("index.jsp");
+                    }
+
+%>
 
 <!DOCTYPE html>
 <html>

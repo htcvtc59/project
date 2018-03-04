@@ -63,7 +63,7 @@
       canvas.className = 'pg-canvas';
       canvas.style.display = 'block';
       element.insertBefore(canvas, element.firstChild);
-      ctx = canvas.getContext('2d');
+      ctx =  canvas.getContext('2d');
       styleCanvas();
 
       // Create particles

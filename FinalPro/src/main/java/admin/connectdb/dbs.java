@@ -11,12 +11,14 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
+import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.UpdateOptions;
 import static com.mongodb.client.model.Updates.*;
 import com.mongodb.util.JSON;
 import java.sql.DatabaseMetaData;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -24,6 +26,7 @@ import java.util.logging.Logger;
 import org.bson.BsonDateTime;
 import org.bson.BsonDouble;
 import org.bson.BsonInt32;
+import org.bson.BsonObjectId;
 import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -36,6 +39,7 @@ public class dbs {
     public MongoCollection getcoladmin = database.getCollection("coladmin");
     public MongoCollection getcolclient = database.getCollection("colclient");
     public MongoCollection getcolproduct = database.getCollection("colproduct");
+    public MongoCollection getcolbid = database.getCollection("colbid");
 
     public static void main(String[] args) {
 
@@ -75,19 +79,21 @@ public class dbs {
 //            System.out.println(status + name + username + address + phone.getString("name") + email.getString("name"));
 //
 //        }
-        SimpleDateFormat sdFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a", Locale.getDefault());
-        Date date = new Date();
+//        SimpleDateFormat sdFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a", Locale.getDefault());
+//        Date date = new Date();
+//
+//        MongoCursor<Document> cursor = new dbs().getcolproduct
+//                .find(and(gt("timebegin", new BsonDateTime(date.getTime())), eq("status", new BsonInt32(1)))).iterator();
+//
+//        System.out.println(JSON.serialize(new dbs().getcolproduct
+//                .find(and(gt("timebegin", new BsonDateTime(date.getTime())), eq("status", new BsonInt32(1))))));
+//        String result = "";
+//        while (cursor.hasNext()) {
+//            result += cursor.next().toJson();
+//        }
+//        System.out.println(result);
+       
 
-        MongoCursor<Document> cursor = new dbs().getcolproduct
-                .find(and(gt("timebegin", new BsonDateTime(date.getTime())), eq("status", new BsonInt32(1)))).iterator();
-
-        System.out.println(JSON.serialize(new dbs().getcolproduct
-                .find(and(gt("timebegin", new BsonDateTime(date.getTime())), eq("status", new BsonInt32(1))))));
-        String result = "";
-        while (cursor.hasNext()) {
-            result += cursor.next().toJson();
-        }
-        System.out.println(result);
     }
 
 }

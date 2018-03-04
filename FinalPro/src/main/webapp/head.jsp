@@ -23,8 +23,10 @@
 <link href="<%=request.getContextPath()%>/asset/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/asset/client/css/flexslider.css" type="text/css" media="screen" />
 <!--//Custom Theme files -->
+
 <!--js-->
-<script src="<%=request.getContextPath()%>/asset/client/js/jquery-1.11.1.min.js"></script>
+<!--<script src="<%=request.getContextPath()%>/asset/public/jquery-3.2.1.min.js" type="text/javascript"></script>-->
+<script src="<%=request.getContextPath()%>/asset/client/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/asset/client/js/modernizr.custom.js"></script>
 <!--//js-->
 <!--cart-->
@@ -37,8 +39,11 @@
 <script src="<%=request.getContextPath()%>/asset/client/js/moment-with-locales.js"></script>
 <!-- datetime -->
 
+
 <!-- particle ground -->
-<script src="<%=request.getContextPath()%>/asset/client/js/jquery.particleground.js"></script>
+<!--<script src="<%=request.getContextPath()%>/asset/client/js/jquery.particleground.js"></script>-->
+
+
 <!--web-fonts-->
 <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'><link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Pompiere' rel='stylesheet' type='text/css'>
@@ -63,4 +68,6 @@
     });
 </script>
 <!--//end-smooth-scrolling-->
+
+
 
