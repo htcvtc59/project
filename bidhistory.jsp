@@ -83,7 +83,7 @@
                                         <td>Junior Technical Author</td>
                                         <td>San Francisco</td>
                                         <td></td>
-                                        <
+                                        
                                     </tr>
                                     <tr>
                                         <td>Cedric</td>
