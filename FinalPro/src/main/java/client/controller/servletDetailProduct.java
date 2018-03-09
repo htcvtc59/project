@@ -39,48 +39,18 @@ public class servletDetailProduct extends HttpServlet {
             throws ServletException, IOException {
 
         String idpro = request.getParameter("detail");
-        System.out.println(idpro);
-        String idprodetailbid = request.getParameter("detailbid");
-        
-        if (idprodetailbid.length() > 0 && idprodetailbid != null) {
-            
-            
-        
-        
-        }
-        
+
         if (idpro.length() > 0 && idpro != null) {
-            MongoCursor<Document> probid = new dbs().getcolbid
-                    .find(and(eq("idproduct", new BsonObjectId(new ObjectId(idpro))),
-                            eq("status", new BsonInt32(1))))
-                    .sort(Sorts.descending("startprice")).iterator();
 
-            MongoCursor<Document> prodoing = new dbs().getcolproduct
-                    .find(and(lte("timebegin", new BsonDateTime(new Date().getTime())),
-                            gt("timeend", new BsonDateTime(new Date().getTime())),
-                            eq("status", new BsonInt32(1)),
-                            eq("_id", new BsonObjectId(new ObjectId(idpro))))).iterator();
+            MongoCursor<Document> doc = new dbs().getcolproduct
+                    .find(eq("_id", new BsonObjectId(new ObjectId(idpro)))).iterator();
 
-            MongoCursor<Document> prodone = new dbs().getcolproduct
-                    .find(and(eq("status", new BsonInt32(3))
-                            ,eq("_id", new BsonObjectId(new ObjectId(idpro))))).iterator();
-
-            if (prodoing.hasNext()) {
-                Document doc = prodoing.next();
-                request.setAttribute("datadetaildoing", doc);
-                RequestDispatcher rd = request.getRequestDispatcher("products_detail_bid.jsp");
-                rd.forward(request, response);
-            }
-
-            if (prodone.hasNext()) {
-                Document doc = prodone.next();
-                request.setAttribute("datadetaildone", doc);
-                RequestDispatcher rd = request.getRequestDispatcher("products_detail_bid.jsp");
-                rd.forward(request, response);
-
-            }
+            request.setAttribute("datadetail", doc);
+            RequestDispatcher rd = request.getRequestDispatcher("products_detail.jsp");
+            rd.forward(request, response);
 
         }
+        
 
     }
 

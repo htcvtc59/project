@@ -40,7 +40,22 @@ public class servletPendingProduct extends HttpServlet {
 
             String result = JSON.serialize(new dbs().getcolproduct
                     .find(and(gt("timebegin", new BsonDateTime(new Date().getTime())),
-                            eq("status", new BsonInt32(1)))));
+                            eq("status", new BsonInt32(1)))).skip(0).limit(3));
+
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().print(result);
+        }
+        
+          String pageac = request.getParameter("pageac");
+        String pageskip = request.getParameter("pageskip");
+
+        if (pageac != null && pageac.equals("pagination") && pageskip != null ) {
+            int skip = Integer.parseInt(pageskip);
+            
+            String result = JSON.serialize(new dbs().getcolproduct
+                    .find(and(gt("timebegin", new BsonDateTime(new Date().getTime())),
+                            eq("status", new BsonInt32(1)))).skip(skip).limit(3));
+
 
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(result);

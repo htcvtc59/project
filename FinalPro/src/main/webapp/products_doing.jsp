@@ -209,6 +209,7 @@
                         $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
                             var doc = JSON.stringify(value);
                             var res = JSON.parse(doc);
+                            console.log(res);
                             var id = res._id.$oid;
                             var nameproduct = res.nameproduct;
                             var pricemin = res.pricemin;

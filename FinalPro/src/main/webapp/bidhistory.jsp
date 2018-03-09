@@ -78,7 +78,7 @@
 
                                     <tr>
                                         <td><%=nameclient%></td>
-                                        <td><a href="servletDetailProduct?detailbid=<%=idproduct%>">Detail Product</a></td>
+                                        <td><a href="servletDetailProductBid?detailbid=<%=idproduct%>">Detail Product</a></td>
                                         <td><%=startprice%></td>
                                         <td><%=step%></td>
                                         <td><%=createddate%></td>

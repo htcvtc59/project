@@ -33,12 +33,25 @@ public class servletDoneProduct extends HttpServlet {
         if (done != null && done.equals("donedata")) {
             
             String result = JSON.serialize(new dbs().getcolproduct
-                    .find(eq("status", new BsonInt32(3))));
+                    .find(eq("status", new BsonInt32(3))).skip(0).limit(3));
 
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().print(result);
             
             
+        }
+        
+         String pageac = request.getParameter("pageac");
+        String pageskip = request.getParameter("pageskip");
+
+        if (pageac != null && pageac.equals("pagination") && pageskip != null ) {
+            int skip = Integer.parseInt(pageskip);
+
+            String result = JSON.serialize(new dbs().getcolproduct
+                    .find(eq("status", new BsonInt32(3))).skip(skip).limit(3));
+
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().print(result);
         }
 
     }
