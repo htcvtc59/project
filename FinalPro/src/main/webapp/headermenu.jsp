@@ -14,7 +14,7 @@
                 <!-- Logout    -->
                 <p>Welcome to <%=session.getAttribute("usernameclient")%>
                     <a href="accountdetail.jsp">Detail </a>
-                    <a href="bidhistory.jsp">Bid History </a>
+                    <a href="servletBidHistory?action=bid">Bid History </a>
                     <a href="signin?action=logout">Logout</a></p>
                 <%
                     }

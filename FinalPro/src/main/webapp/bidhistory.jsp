@@ -1,9 +1,9 @@
-<%-- 
-    Document   : bidhistory
-    Created on : Feb 28, 2018, 8:57:02 AM
-    Author     : Admin
---%>
-
+<%@page import="com.mongodb.client.MongoCursor"%>
+<%@page import="java.util.Date"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="org.bson.Document"%>
+<%@page import="org.bson.Document"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -47,50 +47,46 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                             <table id="tblBid" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                            <table id="tblBid" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>ID_Record</th>
-                                        <th>ID Auction</th>
-                                        <th>Date time</th>
-                                        <th>Bid Price</th>
-                                        <th>View</th>
-
+                                        <th>Name</th>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Step</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger</td>
-                                        <td>Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td></td>
+                                    <%
 
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett</td>
-                                        <td>Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td></td>
+                                        if (request.getAttribute("bidhis") != null) {
+                                            MongoCursor<Document> cursor = (MongoCursor<Document>) request.getAttribute("bidhis");
 
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton</td>
-                                        <td>Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td></td>
+                                            while (cursor.hasNext()) {
+                                                Document document = cursor.next();
+                                                String id = new Gson().fromJson(document.getObjectId("_id").toString(),
+                                                        JsonElement.class).getAsString();
+                                                String nameclient = document.getString("nameclient");
+                                                String idproduct = new Gson().fromJson(document.getObjectId("idproduct").toString(),
+                                                        JsonElement.class).getAsString();
+                                                Double startprice = document.getDouble("startprice");
+                                                Date createddate = document.getDate("createddate");
+                                                Double step = document.getDouble("step");
                                         
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric</td>
-                                        <td>Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td></td>
+                                    %>
 
+                                    <tr>
+                                        <td><%=nameclient%></td>
+                                        <td><a href="servletDetailProduct?detailbid=<%=idproduct%>">Detail Product</a></td>
+                                        <td><%=startprice%></td>
+                                        <td><%=step%></td>
+                                        <td><%=createddate%></td>
                                     </tr>
+                                    <%
+                                            }
+                                        }
+                                    %>
 
                                 </tbody>
                             </table>
@@ -115,7 +111,7 @@
             $('#tblBid').DataTable();
         });
 
-       
+
     </script>
 
     <script src="<%=request.getContextPath()%>/asset/vendors/datatables.net/jquery.dataTables.min.js" type="text/javascript"></script>

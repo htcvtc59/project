@@ -4,6 +4,12 @@
     Author     : smart
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="com.mongodb.client.MongoCursor"%>
+<%@page import="org.bson.Document"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,6 +45,43 @@
             </div>
         </div>
         <!--//breadcrumbs-->
+
+        <%
+            if (request.getAttribute("datadetail") != null) {
+                MongoCursor<Document> cursor = (MongoCursor<Document>) request.getAttribute("datadetail");
+
+                while (cursor.hasNext()) {
+                    Document document = cursor.next();
+                    String id = new Gson().fromJson(document.getObjectId("_id").toString(),
+                            JsonElement.class).getAsString();
+                    String nameproduct = document.getString("nameproduct");
+                    String clientid = new Gson().fromJson(document.getObjectId("clientid").toString(),
+                            JsonElement.class).getAsString();
+                    Date createddate = document.getDate("createddate");
+                    Date timebegin = document.getDate("timebegin");
+                    Date timeend = document.getDate("timeend");
+                    Double pricemin = document.getDouble("pricemin");
+                    Double stepprice = document.getDouble("stepprice");
+                    Integer quantity = document.getInteger("quantity");
+
+                    String image = document.getString("image");
+                    String slide = document.getString("slide");
+
+                    String description = document.getString("description");
+                    Integer status = document.getInteger("status");
+
+                    String[] deschar = description.split(" ");
+                    String des = "";
+                    for (int i = 0; i < deschar.length; i++) {
+                        if (i < 30) {
+                            des += deschar[i]+" ";;
+                        }
+                    }
+                    des +="...";
+
+
+        %>
+
         <!--single-page-->
         <div class="single">
             <div class="container">
@@ -46,20 +89,22 @@
                     <div class="col-md-6 single-top wow fadeInLeft animated" data-wow-delay=".5s">	
                         <div class="flexslider">
                             <ul class="slides">
-                                <li data-thumb="<%=request.getContextPath()%>/asset/client/images/s1.jpg">
-                                    <div class="thumb-image"> <img src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                <%                      
+                                    for (String imgimore : slide.split(",")) {
+
+                                %>
+                                <li data-thumb="<%=request.getContextPath()%><%=imgimore%>">
+                                    <div class="thumb-image"> <img src="<%=request.getContextPath()%><%=imgimore%>" data-imagezoom="true" class="img-responsive" alt=""> </div>
                                 </li>
-                                <li data-thumb="<%=request.getContextPath()%>/asset/client/images/s2.jpg">
-                                    <div class="thumb-image"> <img src="<%=request.getContextPath()%>/asset/client/images/s2.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                                </li>
-                                <li data-thumb="<%=request.getContextPath()%>/asset/client/images/s3.jpg">
-                                    <div class="thumb-image"> <img src="<%=request.getContextPath()%>/asset/client/images/s3.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                                </li> 
+                                <%
+                                    }
+                                %>
+
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
-                        <h3>Babyhug Kurta And Jodhpuri Breeches</h3>
+                        <h3><%=nameproduct%></h3>
                         <div class="single-rating">
                             <span class="starRating">
                                 <input id="rating5" type="radio" name="rating" value="5" checked>
@@ -73,11 +118,13 @@
                                 <input id="rating1" type="radio" name="rating" value="1">
                                 <label for="rating1">1</label>
                             </span>
-                           
+
                         </div>
-                        <h6 class="item_price">$600.00</h6>			
-                        <p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                     
+                        <h6 class="item_price">$<%=pricemin%></h6>			
+                        <p>
+                            <%=des%>
+                        </p>
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -94,16 +141,21 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    
+                                    <%=description%>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <!--//collapse -->
             </div>
         </div>
+
+        <%                }
+            }
+        %>
         <!--footer-->
         <jsp:include page="footer.jsp" />
         <!--//footer-->		

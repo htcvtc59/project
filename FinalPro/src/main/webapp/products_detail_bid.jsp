@@ -4,6 +4,9 @@
     Author     : smart
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="org.bson.Document"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,127 +27,237 @@
             </div>
         </div>
         <!--//breadcrumbs-->
+
+
         <!--products-->
         <div class="products">	 
             <div class="container">
                 <div class="col-md-12 product-model-sec">
+                    <%
+                        if (request.getAttribute("datadetaildoing") != null) {
 
+                            Document document = (Document) request.getAttribute("datadetaildoing");
+                            String id = new Gson().fromJson(document.getObjectId("_id").toString(),
+                                    JsonElement.class).getAsString();
+                            String nameproduct = document.getString("nameproduct");
+                            String clientid = new Gson().fromJson(document.getObjectId("clientid").toString(),
+                                    JsonElement.class).getAsString();
+                            Date createddate = document.getDate("createddate");
+                            Date timebegin = document.getDate("timebegin");
+                            Date timeend = document.getDate("timeend");
+                            Double pricemin = document.getDouble("pricemin");
+                            Double stepprice = document.getDouble("stepprice");
+                            Integer quantity = document.getInteger("quantity");
+
+                            String image = document.getString("image");
+                            String slide = document.getString("slide");
+
+                            String description = document.getString("description");
+                            Integer status = document.getInteger("status");
+
+                    %>
+
+                    <div style="margin-bottom: 2em;" class="itemdo<%=id%> product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                        <span class="time-request ` + id + `"></span>
+                        <div class="new-top">
+                            <a href="single.html"><img style="width: 220px;margin-left: 35px;" src="<%=request.getContextPath()%><%=image%>" class="img-responsive" alt=""/></a>
+                            <div class="new-text">
+                                <ul>
+                                    <li ><a href="#" data-toggle="modal" data-target="#myModalDoing" class="mdoingidView" data-id="<%=id%>">Quick View </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="new-bottom">
+                            <h5><a class="name" href="single.html"><%=nameproduct%> </a></h5>
+                            <div class="rating">
+                                <span class="on">☆</span>
+                                <span class="on">☆</span>
+                                <span class="on">☆</span>
+                                <span class="on">☆</span>
+                                <span>☆</span>
+                            </div>
+                            <div class="ofr">
+                                <p><span class="item_price">$<%=pricemin%></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button trigger modal -->
+                    <div class="modal-data-doing">
+
+                        <div class="modal" id="myModalDoing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">Product View</h4>
+                                    </div>
+                                    <!-- START OF MODAL BODY-->
+                                    <section>
+                                        <div class="modal-body">
+                                            <div id="gallery" class="col-md-5 modal_body_left">
+                                                <div id="panel">
+                                                    <img width="365px" height="460px" id="largeImage" src="" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 modal_body_right">
+                                                <h4 id="modalNameProdo" ></h4>
+                                                <p class="dodatades"></p>
+                                                <div style="margin-top: 50px;" class="rating">
+                                                    <div class="rating-left">
+                                                        <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
+                                                    </div>
+                                                    <div class="rating-left">
+                                                        <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
+                                                    </div>
+                                                    <div class="rating-left">
+                                                        <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
+                                                    </div>
+                                                    <div class="rating-left">
+                                                        <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
+                                                    </div>
+                                                    <div class="rating-left">
+                                                        <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
+                                                    </div>
+                                                    <div class="clearfix"> </div>
+                                                </div>
+                                                <div class="input-group modal_body_right_cart simpleCart_shelfItem">
+                                                    <span style="margin: 10xp;" id="timedoingdo" class="time-request"></span>
+                                                    <span style="left:80px;" class="date-request dodatatimeend"></span>
+                                                    <p><span>Price Start</span> <i class="item_price item_pricemin"></i></p>
+                                                    <p><span>Price Step</span> <i class="item_price item_pricestep"></i></p>
+                                                        <%
+                                                            if (session.getAttribute("usernameclient") == null) {
+                                                        %>
+                                                    <p><a href="signin.jsp" >Sign in</a></p>
+                                                    <%
+                                                    } else {
+
+                                                        String objclient = (String) session.getAttribute("objclient");
+                                                        JsonObject object = new Gson().fromJson(objclient, JsonObject.class);
+
+                                                        JsonObject jobjphone = object.get("phone").getAsJsonObject();
+                                                        String phonename = jobjphone.get("name").getAsString();
+                                                        int phonestatus = jobjphone.get("status").getAsInt();
+                                                    %>
+                                                    <input style="margin-bottom: 10px;" type="text" class="price form-control pricedovalue" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2">
+                                                    <p><a class="item_add" id="doingautionput" href="#" data-status="<%=phonestatus%>" >Aution now</a></p>
+                                                    <div class="errorstatusphone">
+
+                                                    </div>
+                                                    <%
+                                                        }
+                                                    %>
+
+                                                </div>
+
+                                                <div style="height: 200px;
+                                                     width: 100%;
+                                                     margin-top: 30px;" class="col-12 contentscollbar table-homeau-content">
+                                                    <table class="table table-responsive-sm table-sm table-striped">
+                                                        <thead >
+                                                            <tr>
+                                                                <th style="font-weight: normal;" scope="col">List User Aution</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="doinglist_content_value">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </section>
+
+                                    <!-- END OF APPLICATION FORM MODAL BODY -->
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+
+                        </div>            
+
+
+
+
+
+                    </div>
+
+                    <!-- Button trigger modal -->
+
+
+                    <%
+
+                        }
+                    %>
+
+
+
+
+                    <%
+                        if (request.getAttribute("datadetaildone") != null) {
+
+                            Document document = (Document) request.getAttribute("datadetaildoing");
+                            String id = new Gson().fromJson(document.getObjectId("_id").toString(),
+                                    JsonElement.class).getAsString();
+                            String nameproduct = document.getString("nameproduct");
+                            String clientid = new Gson().fromJson(document.getObjectId("clientid").toString(),
+                                    JsonElement.class).getAsString();
+                            Date createddate = document.getDate("createddate");
+                            Date timebegin = document.getDate("timebegin");
+                            Date timeend = document.getDate("timeend");
+                            Double pricemin = document.getDouble("pricemin");
+                            Double stepprice = document.getDouble("stepprice");
+                            Integer quantity = document.getInteger("quantity");
+
+                            String image = document.getString("image");
+                            String slide = document.getString("slide");
+
+                            String description = document.getString("description");
+                            Integer status = document.getInteger("status");
+                            
+
+                    %>
+
+                    <div style="margin-bottom: 2em;" class="itemdo<%=id%> product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                        <span class="time-request ` + id + `"></span>
+                        <div class="new-top">
+                            <a href="single.html"><img style="width: 220px;margin-left: 35px;" src="<%=request.getContextPath()%><%=image%>" class="img-responsive" alt=""/></a>
+                            <div class="new-text">
+                                <ul>
+                                    <li ><a href="#" data-toggle="modal" data-target="#myModalDoing" class="mdoingidView" data-id="<%=id%>">Quick View </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="new-bottom">
+                            <h5><a class="name" href="single.html"><%=nameproduct%> </a></h5>
+                            <div class="rating">
+                                <span class="on">☆</span>
+                                <span class="on">☆</span>
+                                <span class="on">☆</span>
+                                <span class="on">☆</span>
+                                <span>☆</span>
+                            </div>
+                            <div class="ofr">
+                                <p><span class="item_price">$<%=pricemin%></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%
+                        }
+                    %>
 
                 </div>
             </div>
         </div>
 
-        <div class="buttonshowmorepro">
-            <button type="button" class="btn btn-primary btn-block btnmoredo">More</button>
-        </div>
-
-        <!-- Button trigger modal -->
-        <div class="modal-data-doing">
 
 
-            <div class="modal" id="myModalDoing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="myModalLabel">Product View</h4>
-                        </div>
-                        <!-- START OF MODAL BODY-->
-                        <section>
-                            <div class="modal-body">
-                                <div id="gallery" class="col-md-5 modal_body_left">
-                                    <div id="panel">
-                                        <img width="365px" height="460px" id="largeImage" src="" />
-                                    </div>
-                                </div>
-                                <div class="col-md-7 modal_body_right">
-                                    <h4 id="modalNameProdo" ></h4>
-                                    <p class="dodatades"></p>
-                                    <div style="margin-top: 50px;" class="rating">
-                                        <div class="rating-left">
-                                            <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="<%=request.getContextPath()%>/asset/client/images/star.png" alt=" " class="img-responsive" />
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div class="input-group modal_body_right_cart simpleCart_shelfItem">
-                                        <span style="margin: 10xp;" id="timedoingdo" class="time-request"></span>
-                                        <span style="left:80px;" class="date-request dodatatimeend"></span>
-                                        <p><span>Price Start</span> <i class="item_price item_pricemin"></i></p>
-                                        <p><span>Price Step</span> <i class="item_price item_pricestep"></i></p>
-                                            <%
-                                                if (session.getAttribute("usernameclient") == null) {
-                                            %>
-                                        <p><a href="signin.jsp" >Sign in</a></p>
-                                        <%
-                                        } else {
-
-                                            String objclient = (String) session.getAttribute("objclient");
-                                            JsonObject object = new Gson().fromJson(objclient, JsonObject.class);
-
-                                            JsonObject jobjphone = object.get("phone").getAsJsonObject();
-                                            String phonename = jobjphone.get("name").getAsString();
-                                            int phonestatus = jobjphone.get("status").getAsInt();
-                                        %>
-                                        <input style="margin-bottom: 10px;" type="text" class="price form-control pricedovalue" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2">
-                                        <p><a class="item_add" id="doingautionput" href="#" data-status="<%=phonestatus%>" >Aution now</a></p>
-                                        <div class="errorstatusphone">
-
-                                        </div>
-                                        <%
-                                            }
-                                        %>
-
-                                    </div>
-
-                                    <div style="height: 200px;
-                                         width: 100%;
-                                         margin-top: 30px;" class="col-12 contentscollbar table-homeau-content">
-                                        <table class="table table-responsive-sm table-sm table-striped">
-                                            <thead >
-                                                <tr>
-                                                    <th style="font-weight: normal;" scope="col">List User Aution</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="doinglist_content_value">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </section>
-
-                        <!-- END OF APPLICATION FORM MODAL BODY -->
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-
-            </div>            
-
-
-
-
-
-        </div>
-
-        <!-- Button trigger modal -->
 
 
         <!--//products-->
@@ -227,30 +340,7 @@
 
                             console.log(id + "\n" + moment(timebegin)
                                     .format("DD-MM-YYYY HH:mm:ss A").toString());
-                            $('.product-model-sec').append(` <div style="margin-bottom: 2em;" class="itemdo` + id + ` product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-                    <span class="time-request ` + id + `"></span>
-                    <div class="new-top">
-                        <a href="single.html"><img style="width: 220px;margin-left: 35px;" src="<%=request.getContextPath()%>` + image + `" class="img-responsive" alt=""/></a>
-                        <div class="new-text">
-                            <ul>
-                                <li ><a href="#" data-toggle="modal" data-target="#myModalDoing" class="mdoingidView" data-id="` + id + `">Quick View </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="new-bottom">
-                        <h5><a class="name" href="single.html">` + nameproduct + ` </a></h5>
-                        <div class="rating">
-                            <span class="on">☆</span>
-                            <span class="on">☆</span>
-                            <span class="on">☆</span>
-                            <span class="on">☆</span>
-                            <span>☆</span>
-                        </div>
-                        <div class="ofr">
-                            <p><span class="item_price">$` + pricemin + `</span></p>
-                        </div>
-                    </div>
-                </div>`);
+                            $('.product-model-sec').append(` `);
                             var countDownDate = new Date(timeend).getTime();
                             var x = setInterval(function () {
 
@@ -426,104 +516,6 @@
 
                     }
                 });
-
-
-                $('.btnmoredo').off('click').click(function () {
-                    pagenumber++;
-
-                    $.ajax({
-                        url: "/doingProductData",
-                        type: 'GET',
-                        data: {
-                            pageac: "pagination",
-                            pageskip: (pagenumber - 1) * 3
-
-                        },
-                        success: function (data) {
-                            if (JSON.parse(JSON.stringify(data)).length < 3) {
-                                $('.buttonshowmorepro').remove();
-                            }
-
-                            $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
-                                var doc = JSON.stringify(value);
-                                var res = JSON.parse(doc);
-                                var id = res._id.$oid;
-                                var nameproduct = res.nameproduct;
-                                var pricemin = res.pricemin;
-                                var stepprice = res.stepprice;
-                                var quantity = res.quantity;
-                                var image = res.image;
-                                var timebegin = res.timebegin.$date;
-                                var timeend = res.timeend.$date;
-                                var description = res.description.split(";");
-                                var des = "";
-                                for (var i = 0, max = description.length; i < max; i++) {
-                                    if (i < 5) {
-                                        des += description[i];
-                                    }
-                                }
-
-                                console.log(id + "\n" + moment(timebegin)
-                                        .format("DD-MM-YYYY HH:mm:ss A").toString());
-                                $('.product-model-sec').append(` <div style="margin-bottom: 2em;" class="itemdo` + id + ` product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
-                    <span class="time-request ` + id + `"></span>
-                    <div class="new-top">
-                        <a href="single.html"><img style="width: 220px;margin-left: 35px;" src="<%=request.getContextPath()%>` + image + `" class="img-responsive" alt=""/></a>
-                        <div class="new-text">
-                            <ul>
-                                <li ><a href="#" data-toggle="modal" data-target="#myModalDoing" class="mdoingidView" data-id="` + id + `">Quick View </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="new-bottom">
-                        <h5><a class="name" href="single.html">` + nameproduct + ` </a></h5>
-                        <div class="rating">
-                            <span class="on">☆</span>
-                            <span class="on">☆</span>
-                            <span class="on">☆</span>
-                            <span class="on">☆</span>
-                            <span>☆</span>
-                        </div>
-                        <div class="ofr">
-                            <p><span class="item_price">$` + pricemin + `</span></p>
-                        </div>
-                    </div>
-                </div>`);
-                                var countDownDate = new Date(timeend).getTime();
-                                var x = setInterval(function () {
-
-                                    var now = new Date();
-                                    var distance = countDownDate - now;
-                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                                    $('.' + id).text(days + "d " + hours + "h "
-                                            + minutes + "m " + seconds + "s ");
-                                    if (distance < 0) {
-                                        clearInterval(x);
-                                        $('.' + id).text("EXPIRED");
-                                        $('.itemdo' + id).remove();
-                                        $.ajax({
-                                            url: "/doingProductData",
-                                            type: 'GET',
-                                            data: {
-                                                do: "doingdataexpired",
-                                                id: id
-                                            },
-                                            success: function (data) {
-                                            }
-                                        });
-                                    }
-                                }, 1000);
-                            });
-                        }
-                    });
-
-
-                });
-
-
 
 
             });

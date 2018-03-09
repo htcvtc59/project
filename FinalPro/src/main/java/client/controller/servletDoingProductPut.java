@@ -81,15 +81,14 @@ public class servletDoingProductPut extends HttpServlet {
                     int hours = calendar.get(Calendar.HOUR_OF_DAY);
                     int minutes = calendar.get(Calendar.MINUTE);
                     int seconds = calendar.get(Calendar.SECOND);
-                    if (minutes < 3) {
+                    if (minutes < 2) {
                         Document d = new Document("status", "timeout");
                         response.setContentType("application/json;charset=UTF-8");
                         response.getWriter().print(d.toJson());
                     }
                     if (doing != null && doing.equals("doingdataaution")
-                            && doingvalue != null && clientid != null && idproduct != null && minutes > 3) {
-//                        if (doing != null && doing.equals("doingdataaution")
-//                            && doingvalue != null && clientid != null && idproduct != null) {
+                            && doingvalue != null && clientid != null && idproduct != null && minutes > 2) {
+
                         try {
                             Document d = new Document("idproduct", new BsonObjectId(new ObjectId(idproduct)))
                                     .append("idclient", new BsonObjectId(new ObjectId(clientid)))

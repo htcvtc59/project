@@ -4,6 +4,7 @@
     Author     : smart
 --%>
 
+<%@page import="endecode.EncryptionDecryption"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -92,19 +93,18 @@
                             var quantity = res.quantity;
                             var image = res.image;
                             var timebegin = res.timebegin.$date;
-                            var description = res.description.split(";");
+                            var description = res.description.split(" ");
                             var des = "";
                             for (var i = 0, max = description.length; i < max; i++) {
                     if (i < 5){
-                    des += description[i];
+                    des += description[i]+" ";;
                     }
                     }
-
-
+        
                     console.log(id + "\n" + moment(timebegin)
                             .format("DD-MM-YYYY HH:mm:ss A").toString());
 
-                            $('.product-model-sec').append(` <div style="margin-bottom: 2em;" class="product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                            $('.product-model-sec').append(` <div style="margin-bottom: 2em;" class="itempen` + id + ` product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
                     <span class="time-request ` +    id +    `"></span>
                     <div class="new-top">
                         <a href="single.html"><img src="<%=request.getContextPath()%>` + image + `" class="img-responsive" alt=""/></a>
@@ -142,6 +142,7 @@
                                     if (distance < 0) {
                                     clearInterval(x);
                                     $('.' + id).text("EXPIRED");
+                                    $('.itempen' + id).remove();
                             }
                             }, 1000);
                             $('.modal-data-pending').append(`<div class="modal" id="` + id + `" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
@@ -163,7 +164,7 @@
                                     <h4>` + nameproduct + `</h4>
                                     <p>` +
                             des
-                            + `...<a href="products_detail.jsp">more</a></p>
+                            + `...<a href="servletDetailProduct?detail=`+id+`">more</a></p>
                                     <div class="rating" style="margin-top:70px;">
                                         <div class="rating-left">
                                             <img src="<%=request.getContextPath()%>/asset/client/images/star1.png" alt=" " class="img-responsive" />
