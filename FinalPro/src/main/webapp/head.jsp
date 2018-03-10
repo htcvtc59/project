@@ -41,7 +41,7 @@
 
 
 <!-- particle ground -->
-<!--<script src="<%=request.getContextPath()%>/asset/client/js/jquery.particleground.js"></script>-->
+<script src="<%=request.getContextPath()%>/asset/client/js/jquery.particleground.js"></script>
 
 
 <!--web-fonts-->

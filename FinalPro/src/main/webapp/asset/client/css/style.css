@@ -764,12 +764,12 @@ h3.title span {
     box-shadow: 0px 0px 6px 1px #E6E6E6;
 }
 .trend-info {
-    background: #00a6d6;
+    background: #33414e;
     padding: 4em 12em 3em 3em;
 }
 .trend-slider h4 {
     font-size: 2.8em;
-    color: #000;
+    color: wheat;
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
 }
@@ -781,7 +781,7 @@ h3.title span {
 }
 .trend-slider h5 {
     font-size: 3em;
-    color: #014A5F;
+    color: wheat;
     margin-top: .5em;
     text-align: center;
     font-family: 'Fascinate', cursive;

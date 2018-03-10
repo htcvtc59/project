@@ -43,7 +43,7 @@
                 </ul>
             </div>
             <div class="nav navbar-nav logo wow zoomIn animated" data-wow-delay=".7s">
-                <h1><a href="index.jsp">Modern <b>Shoppe</b><span class="tag">Everything for Kids world </span> </a></h1>
+                <h1><a href="index.jsp"><b style="color:#FF590F">AUCTION</b><span class="tag">Everything for Auction world </span> </a></h1>
             </div>
             <div class="nav navbar-nav navbar-right header-two-right">
                 <div class="header-right my-account">

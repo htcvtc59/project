@@ -4,7 +4,7 @@
 
 
 <!--search jQuery-->
-<!--<script src="<%=request.getContextPath()%>/asset/client/js/main.js"></script>-->
+<script src="<%=request.getContextPath()%>/asset/client/js/main.js"></script>
 
 
 

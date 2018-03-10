@@ -84,6 +84,10 @@
                     pen: "pendingdata"
                     },
                     success: function (data) {
+                         if (JSON.parse(JSON.stringify(data)).length < 3) {
+                            $('.buttonshowmorepro').remove();
+                        }
+                        
                     $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
                     var doc = JSON.stringify(value);
                             console.log(doc);
