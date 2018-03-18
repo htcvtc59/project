@@ -1,9 +1,15 @@
 
+<%@page import="java.util.Date"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="com.mongodb.client.MongoCursor"%>
+<%@page import="org.bson.Document"%>
+<%@page import="org.bson.Document"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-                    if(session.getAttribute("usernameclient")==null){
-                        response.sendRedirect("index.jsp");
-                    }
+    if (session.getAttribute("usernameclient") == null) {
+        response.sendRedirect("index.jsp");
+    }
 
 %>
 
@@ -36,6 +42,10 @@
                 $('#Inimgurlsmore').val('');
                 var arrImgIndex = [];
                 $('#clickfileImgmore').on('click', function () {
+                    if(j===0){
+                        $('#showimgbtnmore').html('');
+                        $('#Inimgurlsmore').val('');
+                    }
                     if (arrImgUrlmore.length === 3) {
                         return;
                     }
@@ -109,31 +119,72 @@
                 </div>
 
                 <form>
+                    <%
+                        if (request.getAttribute("dtpostd") != null) {
+                            MongoCursor<Document> doc = (MongoCursor<Document>) request.getAttribute("dtpostd");
+                            while (doc.hasNext()) {
+                                Document document = doc.next();
+                                String id = new Gson().fromJson(document.getObjectId("_id").toString(),
+                                        JsonElement.class).getAsString();
+                                String nameproduct = document.getString("nameproduct");
+                                String clientid = new Gson().fromJson(document.getObjectId("clientid").toString(),
+                                        JsonElement.class).getAsString();
+                                Date createddate = document.getDate("createddate");
+                                Date timebegin = document.getDate("timebegin");
+                                Date timeend = document.getDate("timeend");
+                                Double pricemin = document.getDouble("pricemin");
+                                Double stepprice = document.getDouble("stepprice");
+                                Integer quantity = document.getInteger("quantity");
+
+                                String image = document.getString("image");
+                                String slide = document.getString("slide");
+
+                                String description = document.getString("description");
+                                Integer status = document.getInteger("status");
+
+                                String[] deschar = description.split(" ");
+                                String des = "";
+                                for (int i = 0; i < deschar.length; i++) {
+                                    if (i < 30) {
+                                        des += deschar[i] + " ";;
+                                    }
+                                }
+                                des += "...";
+                                
+                                String[] slidechar = slide.split(",");
+
+                                String imgshow = "<img src =" + image + " width=" + 80 + " height=" + 80 + " >";
+                                String imgshowslide = "<img src =" + slidechar[0] + " width=" + 80 + " height=" + 80 + " >";
+                                imgshowslide += "<img src =" + slidechar[1] + " width=" + 80 + " height=" + 80 + " >";
+                                imgshowslide += "<img src =" + slidechar[2] + " width=" + 80 + " height=" + 80 + " >"; 
+
+                    %>
+
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="inputProductName">Product Name</label>
-                            <input type="text" class="form-control" id="inputProductName" name="proname" placeholder="Product Name">
+                            <input type="text" class="form-control" value="<%=nameproduct%>" id="inputProductName" name="proname" placeholder="Product Name">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputStep">Step</label>
-                            <input type="text" class="form-control" id="inputStep" name="prostep" placeholder="Step">
+                            <input type="text" class="form-control" value="<%=stepprice%>" id="inputStep" name="prostep" placeholder="Step">
                         </div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="inputPrice">Price Start</label>
-                        <input type="text" class="form-control" id="inputPrice" name="proprice" placeholder="Price Start">
+                        <input type="text" class="form-control" value="<%=pricemin%>" id="inputPrice" name="proprice" placeholder="Price Start">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputQuatity">Quatity</label>
-                        <input type="text" class="form-control" id="inputQuatity" name="proquantity" placeholder="Product Quatity">
+                        <input type="text" class="form-control" value="<%=quantity%>" id="inputQuatity" name="proquantity" placeholder="Product Quatity">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="clickfileImg">Import Image</label>
                             <input type="button" class="form-control btn col-md-2" id="clickfileImg" value="Choose File" >
-                            <input type="text" disabled="true" name="proimgurl" id="urlimage" class="form-control col-md-3" />
+                            <input type="text" disabled="true" placeholder="<%=image%>" name="proimgurl" id="urlimage" class="form-control col-md-3" />
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputDateTimeStart">Datetime Start</label>
@@ -157,39 +208,100 @@
                         </div>
 
                         <div class="form-group col-md-12" id="showimgbtn">
-
+                                <%=imgshow%>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="clickfileImgmore">More Images</label>
                             <input type="button" class="form-control btn col-md-2" id="clickfileImgmore" value="Choose File" >
-                            <input type="text" disabled="true" name="proimgmoreurl" id="Inimgurlsmore" class="form-control col-md-6" />
+                            <input type="text" disabled="true" placeholder="<%=slide%>" name="proimgmoreurl" id="Inimgurlsmore" class="form-control col-md-6" />
                         </div>
                         <div class="form-group col-md-12" id="showimgbtnmore">
-
+                                <%=imgshowslide%>
                         </div>
                     </div>
 
 
                     <div class="form-group col-md-12">
                         <label for="ckeditordes">Detail</label>
-                        <textarea class="form-control" name="prodetail" id="ckeditordes" rows="3"></textarea>
+                        <textarea class="form-control" name="prodetail"  id="ckeditordes" rows="3"><%=description%></textarea>
 
                     </div>
 
+                    <%    }
+                        }else{
+                       %>
+                    
+                     <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="inputProductName">Product Name</label>
+                            <input type="text" class="form-control"  id="inputProductName" name="proname" placeholder="Product Name">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputStep">Step</label>
+                            <input type="text" class="form-control" id="inputStep" name="prostep" placeholder="Step">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="inputPrice">Price Start</label>
+                        <input type="text" class="form-control"  id="inputPrice" name="proprice" placeholder="Price Start">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputQuatity">Quatity</label>
+                        <input type="text" class="form-control" id="inputQuatity" name="proquantity" placeholder="Product Quatity">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="clickfileImg">Import Image</label>
+                            <input type="button" class="form-control btn col-md-2" id="clickfileImg" value="Choose File" >
+                            <input type="text" disabled="true"  name="proimgurl" id="urlimage" class="form-control col-md-3" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputDateTimeStart">Datetime Start</label>
+                            <div class='input-group date datetimepicker1'>
+                                <input type='text' class="form-control" name="protimestart" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="inputDateTimeStart">Datetime End</label>
+                            <div class='input-group date datetimepicker1'>
+                                <input type='text' class="form-control" name="protimeend" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col-md-12" id="showimgbtn">
+                              
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="clickfileImgmore">More Images</label>
+                            <input type="button" class="form-control btn col-md-2" id="clickfileImgmore" value="Choose File" >
+                            <input type="text" disabled="true"  name="proimgmoreurl" id="Inimgurlsmore" class="form-control col-md-6" />
+                        </div>
+                        <div class="form-group col-md-12" id="showimgbtnmore">
+                               
+                        </div>
+                    </div>
 
 
-                    <!--                    <div class='col-sm-4'>
-                                            <div class="form-group">
-                                                <label for="inputTime">Time</label>
-                                                <div class='input-group date datetimepicker3'>
-                                                    <input data-format="hh:mm:ss" type='text' class="form-control" />
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-time"></span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>-->
+                    <div class="form-group col-md-12">
+                        <label for="ckeditordes">Detail</label>
+                        <textarea class="form-control" name="prodetail"  id="ckeditordes" rows="3"></textarea>
+
+                    </div>
+                    <%
+                       }
+                    %>
 
                     <div class='col-sm-12'><button type="submit" class="btn btn-primary createpro">Create</button></div>  
                 </form>
@@ -202,7 +314,21 @@
         <!--//footer-->		
         <jsp:include page="jsfooter.jsp"/>
 
+        <!--socket io-->
+        <script src="<%=request.getContextPath()%>/asset/public/socket.io.js" type="text/javascript"></script>
+
         <script type="text/javascript" >
+
+            var socket3000 = io.connect('http://localhost:3000');
+            socket3000.on('connect', function () {
+                socket3000.emit('port3000', {socketid: socket3000.id, name: 'Oke'});
+            });
+
+            var socket4000 = io.connect('http://localhost:4000');
+            socket4000.on('connect', function () {
+                socket4000.emit('port4000', {socketid: socket4000.id, name: 'Oke'});
+            });
+
             $(document).ready(function () {
 
                 var editor = CKEDITOR.replace('ckeditordes');
@@ -212,6 +338,7 @@
 
                 $('.createpro').click(function (e) {
                     e.preventDefault();
+
                     var proname = jQuery('input[name="proname"]').val();
                     var prostep = jQuery('input[name="prostep"]').val();
                     var proprice = jQuery('input[name="proprice"]').val();
@@ -243,7 +370,7 @@
 
                                 $('.alert_message').show();
                                 $('.alert_message').fadeOut(4000);
-                                
+
 //                                function loadweb(){
 //                                     window.location = "http://localhost:8084/createproduct.jsp";
 //                                }
@@ -266,7 +393,7 @@
                 <source src="<%=request.getContextPath()%>/asset/sounds/success.mp3" ></source>
             </audio>
             <audio id="sound_error">
-                 <source src="<%=request.getContextPath()%>/asset/sounds/error.mp3" ></source>
+                <source src="<%=request.getContextPath()%>/asset/sounds/error.mp3" ></source>
             </audio>
         </div>
     </body>

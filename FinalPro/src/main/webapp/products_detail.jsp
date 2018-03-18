@@ -1,9 +1,7 @@
-<%-- 
-    Document   : product_detail
-    Created on : Feb 7, 2018, 1:25:20 PM
-    Author     : smart
---%>
 
+<%@page import="com.google.gson.JsonArray"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.google.gson.JsonElement"%>
 <%@page import="com.google.gson.JsonElement"%>
@@ -78,6 +76,20 @@
                         }
                     }
                     des +="...";
+                    
+
+
+            JsonArray colclientArr = new Gson().fromJson(document.toJson(), JsonObject.class).getAsJsonArray("colclient");
+            Iterator<JsonElement> clientarr = colclientArr.iterator();
+            while (clientarr.hasNext()) {
+                JsonElement ele = clientarr.next();
+                JsonObject clientobj = ele.getAsJsonObject();
+                String sellname = clientobj.get("name").getAsString();
+                String sellphone = clientobj.get("phone").getAsJsonObject().get("name").getAsString();
+                String sellemail = clientobj.get("email").getAsJsonObject().get("name").getAsString();
+                String selladdress = clientobj.get("address").getAsString();
+                    
+                    
 
 
         %>
@@ -87,21 +99,33 @@
             <div class="container">
                 <div class="single-info">		
                     <div class="col-md-6 single-top wow fadeInLeft animated" data-wow-delay=".5s">	
-                        <div class="flexslider">
-                            <ul class="slides">
-                                <%                      
+                       
+                                
+                        <div id="gallery" class="col-md-5 modal_body_left">
+                        <div id="panel">
+                                <img width="365px" height="460px" id="largeImage" src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" />
+                        </div>
+                        <div id="thumbs">
+     <%                      
                                     for (String imgimore : slide.split(",")) {
 
                                 %>
-                                <li data-thumb="<%=request.getContextPath()%><%=imgimore%>">
-                                    <div class="thumb-image"> <img src="<%=request.getContextPath()%><%=imgimore%>" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                                </li>
+                               <img src="<%=request.getContextPath()%><%=imgimore%>" alt="1st image description" />
+                               
                                 <%
                                     }
                                 %>
-
-                            </ul>
+   
                         </div>
+                        </div>
+                    <script type="text/javascript">
+                            $('#thumbs img').click(function () {
+                            $('#largeImage').attr('src', $(this).attr('src').replace('thumb', 'large'));
+                            $('#description').html($(this).attr('alt'));
+                    });
+                    </script>  
+                                
+                                
                     </div>
                     <div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
                         <h3><%=nameproduct%></h3>
@@ -126,6 +150,35 @@
                         </p>
 
                     </div>
+                        
+                                  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Seller
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Infor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div> Name: <%=sellname%></div>
+          <div> Email: <%=sellemail%></div>
+          <div> Phone: <%=sellphone%></div>
+          <div> Address: <%=selladdress%></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+                        
                     <div class="clearfix"> </div>
                 </div>
                 <!--collapse-tabs-->
@@ -153,7 +206,7 @@
             </div>
         </div>
 
-        <%                }
+        <%                }}
             }
         %>
         <!--footer-->

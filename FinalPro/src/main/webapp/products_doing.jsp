@@ -138,10 +138,6 @@
 
             </div>            
 
-
-
-
-
         </div>
 
         <!-- Button trigger modal -->
@@ -169,7 +165,7 @@
                 socket4000.emit('port4000', {socketid: socket4000.id, name: 'Oke'});
             });
 
-            socket3000.on("serversendputbid", function (data) {
+            socket4000.on("serversendputbid", function (data) {
                 var res = JSON.parse(data);
                 console.log(res);
                 var name = res.nameclient;
@@ -182,14 +178,52 @@
 
                 $('.item_pricemin').text('');
                 $('.item_pricemin').text("$" + price);
-                $('.dolist_user_value' + idproduct).prepend(`
+                
+                       <%
+                         String objclientser = (String) session.getAttribute("objclient");
+                         if(objclientser!=null){
+                         JsonObject objectser = new Gson().fromJson(objclientser, JsonObject.class);
+                        JsonObject jobjidser = objectser.get("_id").getAsJsonObject();
+                          String clientidser = jobjidser.get("$oid").getAsString();
+                         
+                                 %>
+                                 if(idclient=="<%=clientidser%>"){
+                                      $('.dolist_user_value' + idproduct).prepend(`
+                                                <tr style="background-color: #9999ff;">
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecreate)
+                                          .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);
+                                     
+                                }else{
+                                $('.dolist_user_value' + idproduct).prepend(`
                                                 <tr>
                                                     <td>` + name + `</td>
                                                     <td>` + price + `</td>
                                                     <td>` + moment(timecreate)
-                        .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                          .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
                                                 </tr>
                                                 `);
+                                }
+  
+                            <%
+                            }else{
+                            %>
+                              $('.dolist_user_value' + idproduct).prepend(`
+                                                <tr>
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecreate)
+                                          .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);
+
+                             <%
+                            }
+                            %>
+                     
             });
 
             $(document).ready(function () {
@@ -341,7 +375,7 @@
                             idlist: id
                         },
                         success: function (data) {
-                            $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
+            $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
                                 var res = JSON.parse(JSON.stringify(value));
                                 var name = res.nameclient;
                                 var id = res._id.$oid;
@@ -353,15 +387,49 @@
                                     $('.item_pricemin').text('');
                                     $('.item_pricemin').text("$" + JSON.parse(JSON.stringify(data))[0].startprice);
                                 }
+                                 <%
 
-                                $('#doinglist_content_value').append(`
+                                String objclient = (String) session.getAttribute("objclient");
+                                if(objclient!=null){
+                                JsonObject object = new Gson().fromJson(objclient, JsonObject.class);
+                                JsonObject jobjid = object.get("_id").getAsJsonObject();
+                                String clientid = jobjid.get("$oid").getAsString();
+                                 %>
+                                 if(idclient=="<%=clientid%>"){
+                                          $('#doinglist_content_value').append(`
+                                                <tr style="background-color: #9999ff;">
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);              
+    
+                                          }else{
+                                        $('#doinglist_content_value').append(`
                                                 <tr>
                                                     <td>` + name + `</td>
                                                     <td>` + price + `</td>
                                                     <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
                                                 </tr>
-                                                `);
+                                                `);   
+                                    }
+                            <%
+                            }else{
+                            %>
+                              $('#doinglist_content_value').append(`
+                                                <tr>
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);   
+
+                             <%
+                            }
+                            %>
+                                                    
                             });
+                           
                         }
                     });
                 });

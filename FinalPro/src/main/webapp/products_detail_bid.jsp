@@ -1,4 +1,5 @@
 
+<%@page import="com.google.gson.JsonArray"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.mongodb.client.MongoCursor"%>
@@ -252,9 +253,88 @@
                             }
                             des += "...";
 
+                            JsonObject rootibj = new Gson().fromJson(document.toJson().toString(),
+                                    JsonElement.class).getAsJsonObject();
+
+                            JsonArray colbid = rootibj.get("colbid").getAsJsonArray();
+                            JsonObject colbidroot = colbid.get(0).getAsJsonObject();
+                            String nameclient = colbidroot.get("nameclient").getAsString();
+                            String startprice = colbidroot.get("startprice").getAsString();
+
 
                     %>
 
+                    <script  type="text/javascript"> 
+                        $(document).ready(function(){
+                             $.ajax({
+                        url: '/doingProductData',
+                        type: 'POST',
+                        data: {
+                            dolist: "doingdatalist",
+                            idlist: "<%=id%>"
+                        },
+                        success: function (data) {
+                        $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
+                                var res = JSON.parse(JSON.stringify(value));
+                                var name = res.nameclient;
+                                var id = res._id.$oid;
+                                var idclient = res.idclient.$oid;
+                                var price = res.startprice;
+                                var timecteate = res.createddate.$date;
+                                pricereplace = price;
+                                if (data.length > 0) {
+                                    $('.item_pricemin').text('');
+                                    $('.item_pricemin').text("$" + JSON.parse(JSON.stringify(data))[0].startprice);
+                                }
+                                 <%
+
+                                String objclient = (String) session.getAttribute("objclient");
+                                if(objclient!=null){
+                                JsonObject object = new Gson().fromJson(objclient, JsonObject.class);
+                                JsonObject jobjid = object.get("_id").getAsJsonObject();
+                                String clientidd = jobjid.get("$oid").getAsString();
+                                 %>
+                                 if(idclient=="<%=clientidd%>"){
+                                          $('#doinglist_content_value').append(`
+                                                <tr style="background-color: #9999ff;">
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);              
+    
+                                          }else{
+                                        $('#doinglist_content_value').append(`
+                                                <tr>
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);   
+                                    }
+                            <%
+                            }else{
+                            %>
+                              $('#doinglist_content_value').append(`
+                                                <tr>
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);   
+
+                             <%
+                            }
+                            %>
+                                                    
+                            });
+                           
+                        }
+                    });
+                            
+                        });
+                        
+                    </script>
                     <div style="margin-bottom: 2em;" class="itemdo<%=id%> product-grids product-grids-mdl simpleCart_shelfItem wow fadeInUp animated animated" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
                         <span class="time-request" style="color: red;">Done</span>
                         <div class="new-top">
@@ -321,11 +401,29 @@
                                                 </div>
                                                 <div class="input-group modal_body_right_cart simpleCart_shelfItem">
                                                     <span style="" class="date-request"><script>
-                                                       $('.date-request').text('END '+moment(<%=timeend.getTime()%>).format("DD-MM-YYYY HH:mm:ss A").toString());
+                                                        $('.date-request').text('END ' + moment(<%=timeend.getTime()%>).format("DD-MM-YYYY HH:mm:ss A").toString());
                                                         </script></span>
                                                     <p><span>Price Start</span> <i class="item_price">$<%=pricemin%></i></p>
                                                     <p><span>Price Step</span> <i class="item_price">$<%=stepprice%></i></p>
                                                 </div>
+                                                
+                                            <div class="col-12">
+                                                <h2><h2>The winner is : </h2><h2 style="color:red;"><%=nameclient%> $ <%=startprice%> usd <h2></h2>
+                                            </div>
+                                            <div style="height: 200px;
+                                                 width: 100%;
+                                                 margin-top: 30px;" class="col-12 contentscollbar table-homeau-content">
+                                                <table class="table table-responsive-sm table-sm table-striped">
+                                                    <thead >
+                                                        <tr>
+                                                            <th style="font-weight: normal;" scope="col">List User Aution</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="doinglist_content_value">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
                                             </div>
                                             <div class="clearfix"> </div>
@@ -370,172 +468,259 @@
         <script src="<%=request.getContextPath()%>/asset/public/socket.io.js" type="text/javascript"></script>
 
         <script type="text/javascript" >
-                        var socket3000 = io.connect('http://localhost:3000');
-                        socket3000.on('connect', function () {
-                            socket3000.emit('port3000', {socketid: socket3000.id, name: 'Oke'});
-                        });
-                        var socket4000 = io.connect('http://localhost:4000');
-                        socket4000.on('connect', function () {
-                            socket4000.emit('port4000', {socketid: socket4000.id, name: 'Oke'});
-                        });
+                                                        var socket3000 = io.connect('http://localhost:3000');
+                                                        socket3000.on('connect', function () {
+                                                            socket3000.emit('port3000', {socketid: socket3000.id, name: 'Oke'});
+                                                        });
+                                                        var socket4000 = io.connect('http://localhost:4000');
+                                                        socket4000.on('connect', function () {
+                                                            socket4000.emit('port4000', {socketid: socket4000.id, name: 'Oke'});
+                                                        });
 
-                        socket3000.on("serversendputbid", function (data) {
-                            var res = JSON.parse(data);
-                            console.log(res);
-                            var name = res.nameclient;
-                            var id = res._id;
-                            var idclient = res.idclient;
-                            var idproduct = res.idproduct;
-                            var price = res.startprice;
-                            var timecreate = res.createddate.$date;
+                                                        socket3000.on("serversendputbid", function (data) {
+                                                            var res = JSON.parse(data);
+                                                            console.log(res);
+                                                            var name = res.nameclient;
+                                                            var id = res._id;
+                                                            var idclient = res.idclient;
+                                                            var idproduct = res.idproduct;
+                                                            var price = res.startprice;
+                                                            var timecreate = res.createddate.$date;
 //                                    pricereplace = price;
 
-                            $('.item_pricemin').text('');
-                            $('.item_pricemin').text("$" + price);
-                            $('.dolist_user_value' + idproduct).prepend(`
+                                                            $('.item_pricemin').text('');
+                                                            $('.item_pricemin').text("$" + price);
+            <%
+                                String objclientsera = (String) session.getAttribute("objclient");
+                                if (objclientsera != null) {
+                                    JsonObject objectser = new Gson().fromJson(objclientsera, JsonObject.class);
+                                    JsonObject jobjidser = objectser.get("_id").getAsJsonObject();
+                                    String clientidser = jobjidser.get("$oid").getAsString();
+
+            %>
+                                                            if (idclient == "<%=clientidser%>") {
+                                                                $('.dolist_user_value' + idproduct).prepend(`
+                                                <tr style="background-color: #9999ff;">
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecreate)
+                                                                        .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);
+
+                                                            } else {
+                                                                $('.dolist_user_value' + idproduct).prepend(`
                                                 <tr>
                                                     <td>` + name + `</td>
                                                     <td>` + price + `</td>
                                                     <td>` + moment(timecreate)
-                                    .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                                        .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
                                                 </tr>
                                                 `);
-                        });
+                                                            }
 
-                        $(document).ready(function () {
-                            var pagenumber = 1;
+            <%
+                            } else {
+            %>
+                                                            $('.dolist_user_value' + idproduct).prepend(`
+                                                <tr>
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecreate)
+                                                                    .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);
 
-                            $('.product-model-sec').off('click').on('click', '.mdoingidView', function () {
-                                var id = $(this).data('id');
-                                var pricereplace = null;
+            <%
+                                 }
+            %>
+//                            
+//                            $('.dolist_user_value' + idproduct).prepend(`
+//                                                <tr>
+//                                                    <td>` + name + `</td>
+//                                                    <td>` + price + `</td>
+//                                                    <td>` + moment(timecreate)
+//                                    .format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+//                                                </tr>
+//                                                `);
+                                                        });
 
-                                $('#doingautionput').data("id", id);
+                                                        $(document).ready(function () {
+                                                            var pagenumber = 1;
 
-                                $('#doinglist_content_value').html('');
-                                $('#doinglist_content_value').removeAttr("class");
-                                $('#doinglist_content_value').addClass("dolist_user_value" + id);
-                                $.ajax({
-                                    url: "/doingProductData",
-                                    type: 'POST',
-                                    data: {
-                                        do: "doingdatamodal",
-                                        id: id
-                                    },
-                                    success: function (data) {
-                                        var id = data._id.$oid;
-                                        var nameproduct = data.nameproduct;
-                                        var pricemin = data.pricemin;
-                                        var stepprice = data.stepprice;
-                                        var quantity = data.quantity;
-                                        var image = data.image;
-                                        var timebegin = data.timebegin.$date;
-                                        var timeend = data.timeend.$date;
-                                        var description = data.description.split(" ");
-                                        ;
-                                        var des = "";
-                                        for (var i = 0, max = description.length; i < max; i++) {
-                                            if (i < 20) {
-                                                des += description[i] + " ";
-                                            }
-                                        }
+                                                            $('.product-model-sec').off('click').on('click', '.mdoingidView', function () {
+                                                                var id = $(this).data('id');
+                                                                var pricereplace = null;
 
-                                        $("#largeImage").attr("src", "<%=request.getContextPath()%>" + image);
-                                        $('#modalNameProdo').text(nameproduct);
-                                        if (pricereplace === null) {
-                                            $('.item_pricemin').text("$" + pricemin);
-                                        }
-                                        $('.item_pricestep').text("$" + stepprice);
-                                        $('.dodatades').html(des + `...<a href="servletDetailProduct?detail=` + id + `">more</a>`);
-                                        $('.dodatatimeend').html(moment(timeend).format("DD-MM-YYYY HH:mm:ss A").toString());
-                                        $('#timedoingdo').removeAttr("class");
-                                        $('#timedoingdo').addClass("time-request " + id);
+                                                                $('#doingautionput').data("id", id);
 
-                                        $('#doingautionput').data("timebegin", moment(timebegin).format("DD/MM/YYYY HH:mm:ss a").toString());
-                                        $('#doingautionput').data("timeend", moment(timeend).format("DD/MM/YYYY HH:mm:ss a").toString());
-                                        $('#doingautionput').data("stepprice", stepprice);
-                                    }
+                                                                $('#doinglist_content_value').html('');
+                                                                $('#doinglist_content_value').removeAttr("class");
+                                                                $('#doinglist_content_value').addClass("dolist_user_value" + id);
+                                                                $.ajax({
+                                                                    url: "/doingProductData",
+                                                                    type: 'POST',
+                                                                    data: {
+                                                                        do: "doingdatamodal",
+                                                                        id: id
+                                                                    },
+                                                                    success: function (data) {
+                                                                        var id = data._id.$oid;
+                                                                        var nameproduct = data.nameproduct;
+                                                                        var pricemin = data.pricemin;
+                                                                        var stepprice = data.stepprice;
+                                                                        var quantity = data.quantity;
+                                                                        var image = data.image;
+                                                                        var timebegin = data.timebegin.$date;
+                                                                        var timeend = data.timeend.$date;
+                                                                        var description = data.description.split(" ");
+                                                                        ;
+                                                                        var des = "";
+                                                                        for (var i = 0, max = description.length; i < max; i++) {
+                                                                            if (i < 20) {
+                                                                                des += description[i] + " ";
+                                                                            }
+                                                                        }
 
-                                });
-                                $.ajax({
-                                    url: '/doingProductData',
-                                    type: 'POST',
-                                    data: {
-                                        dolist: "doingdatalist",
-                                        idlist: id
-                                    },
-                                    success: function (data) {
-                                        $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
-                                            var res = JSON.parse(JSON.stringify(value));
-                                            var name = res.nameclient;
-                                            var id = res._id.$oid;
-                                            var idclient = res.idclient.$oid;
-                                            var price = res.startprice;
-                                            var timecteate = res.createddate.$date;
-                                            pricereplace = price;
-                                            if (data.length > 0) {
-                                                $('.item_pricemin').text('');
-                                                $('.item_pricemin').text("$" + JSON.parse(JSON.stringify(data))[0].startprice);
-                                            }
+                                                                        $("#largeImage").attr("src", "<%=request.getContextPath()%>" + image);
+                                                                        $('#modalNameProdo').text(nameproduct);
+                                                                        if (pricereplace === null) {
+                                                                            $('.item_pricemin').text("$" + pricemin);
+                                                                        }
+                                                                        $('.item_pricestep').text("$" + stepprice);
+                                                                        $('.dodatades').html(des + `...<a href="servletDetailProduct?detail=` + id + `">more</a>`);
+                                                                        $('.dodatatimeend').html(moment(timeend).format("DD-MM-YYYY HH:mm:ss A").toString());
+                                                                        $('#timedoingdo').removeAttr("class");
+                                                                        $('#timedoingdo').addClass("time-request " + id);
 
-                                            $('#doinglist_content_value').append(`
+                                                                        $('#doingautionput').data("timebegin", moment(timebegin).format("DD/MM/YYYY HH:mm:ss a").toString());
+                                                                        $('#doingautionput').data("timeend", moment(timeend).format("DD/MM/YYYY HH:mm:ss a").toString());
+                                                                        $('#doingautionput').data("stepprice", stepprice);
+                                                                    }
+
+                                                                });
+                                                                $.ajax({
+                                                                    url: '/doingProductData',
+                                                                    type: 'POST',
+                                                                    data: {
+                                                                        dolist: "doingdatalist",
+                                                                        idlist: id
+                                                                    },
+                                                                    success: function (data) {
+                                                                        $.each(JSON.parse(JSON.stringify(data)), function (index, value) {
+                                                                            var res = JSON.parse(JSON.stringify(value));
+                                                                            var name = res.nameclient;
+                                                                            var id = res._id.$oid;
+                                                                            var idclient = res.idclient.$oid;
+                                                                            var price = res.startprice;
+                                                                            var timecteate = res.createddate.$date;
+                                                                            pricereplace = price;
+                                                                            if (data.length > 0) {
+                                                                                $('.item_pricemin').text('');
+                                                                                $('.item_pricemin').text("$" + JSON.parse(JSON.stringify(data))[0].startprice);
+                                                                            }
+
+//                                            $('#doinglist_content_value').append(`
+//                                                <tr>
+//                                                    <td>` + name + `</td>
+//                                                    <td>` + price + `</td>
+//                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+//                                                </tr>
+//                                                `);
+
+
+            <%
+
+           String objclient = (String) session.getAttribute("objclient");
+           if (objclient != null) {
+               JsonObject object = new Gson().fromJson(objclient, JsonObject.class);
+               JsonObject jobjid = object.get("_id").getAsJsonObject();
+               String clientid = jobjid.get("$oid").getAsString();
+            %>
+                                                                            if (idclient == "<%=clientid%>") {
+                                                                                $('#doinglist_content_value').append(`
+                                                <tr style="background-color: #9999ff;">
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);
+
+                                                                            } else {
+                                                                                $('#doinglist_content_value').append(`
                                                 <tr>
                                                     <td>` + name + `</td>
                                                     <td>` + price + `</td>
                                                     <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
                                                 </tr>
                                                 `);
-                                        });
-                                    }
-                                });
-                            });
+                                                                            }
+            <%
+                            } else {
+            %>
+                                                                            $('#doinglist_content_value').append(`
+                                                <tr>
+                                                    <td>` + name + `</td>
+                                                    <td>` + price + `</td>
+                                                    <td>` + moment(timecteate).format("DD/MM/YYYY HH:mm:ss a").toString() + `</td>
+                                                </tr>
+                                                `);
 
-                            $('#doingautionput').off('click').click(function (e) {
-                                e.preventDefault();
-                                var datastatus = $(this).data('status');
-                                if (datastatus === 0) {
-                                    $('.errorstatusphone').html(`<a class="badge badge-danger" href="accountdetail.jsp">Please,Verify Phone Number</a>`);
-                                } else {
-                                    var pricemin = $('.item_pricemin').text().replace("$", "");
-                                    var pricestep = $('.item_pricestep').text().replace("$", "");
-                                    var pricedovalue = $('.pricedovalue').val();
-                                    var priceovercome = parseInt(pricemin) + parseInt(pricestep);
-                                    if (parseInt(pricedovalue) > priceovercome && parseInt(pricedovalue) !== "NaN") {
-                                        $('.errorstatusphone').html('');
-                                        var idproduct = $(this).data('id');
-                                        var timebegin = $(this).data('timebegin');
-                                        var timeend = $(this).data('timeend');
-                                        var stepprice = $(this).data('stepprice');
-                                        $.ajax({
-                                            url: "/servletDoingProductPut",
-                                            type: 'GET',
-                                            data: {
-                                                do: "doingdataaution",
-                                                value: parseInt(pricedovalue),
-                                                idproduct: idproduct,
-                                                timebegin: timebegin,
-                                                timeend: timeend,
-                                                stepprice: stepprice
-                                            },
-                                            success: function (data) {
-                                                if (data === null) {
-                                                    return;
-                                                }
-                                                if (data.status === "timeout") {
-                                                    $('.errorstatusphone').html(`<p class="badge badge-danger">Enter Value Then 2 Minutes </p>`);
-                                                } else {
+            <%
+                                 }
+            %>
+                                                                        });
+                                                                    }
+                                                                });
+                                                            });
 
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        $('.errorstatusphone').html(`<p class="badge badge-danger">Enter Value is Number or Price must greater than ` + priceovercome + `</p>`);
-                                    }
+                                                            $('#doingautionput').off('click').click(function (e) {
+                                                                e.preventDefault();
+                                                                var datastatus = $(this).data('status');
+                                                                if (datastatus === 0) {
+                                                                    $('.errorstatusphone').html(`<a class="badge badge-danger" href="accountdetail.jsp">Please,Verify Phone Number</a>`);
+                                                                } else {
+                                                                    var pricemin = $('.item_pricemin').text().replace("$", "");
+                                                                    var pricestep = $('.item_pricestep').text().replace("$", "");
+                                                                    var pricedovalue = $('.pricedovalue').val();
+                                                                    var priceovercome = parseInt(pricemin) + parseInt(pricestep);
+                                                                    if (parseInt(pricedovalue) > priceovercome && parseInt(pricedovalue) !== "NaN") {
+                                                                        $('.errorstatusphone').html('');
+                                                                        var idproduct = $(this).data('id');
+                                                                        var timebegin = $(this).data('timebegin');
+                                                                        var timeend = $(this).data('timeend');
+                                                                        var stepprice = $(this).data('stepprice');
+                                                                        $.ajax({
+                                                                            url: "/servletDoingProductPut",
+                                                                            type: 'GET',
+                                                                            data: {
+                                                                                do: "doingdataaution",
+                                                                                value: parseInt(pricedovalue),
+                                                                                idproduct: idproduct,
+                                                                                timebegin: timebegin,
+                                                                                timeend: timeend,
+                                                                                stepprice: stepprice
+                                                                            },
+                                                                            success: function (data) {
+                                                                                if (data === null) {
+                                                                                    return;
+                                                                                }
+                                                                                if (data.status === "timeout") {
+                                                                                    $('.errorstatusphone').html(`<p class="badge badge-danger">Enter Value Then 2 Minutes </p>`);
+                                                                                } else {
 
-                                }
-                            });
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                    } else {
+                                                                        $('.errorstatusphone').html(`<p class="badge badge-danger">Enter Value is Number or Price must greater than ` + priceovercome + `</p>`);
+                                                                    }
+
+                                                                }
+                                                            });
 
 
-                        });
+                                                        });
 
 
         </script>

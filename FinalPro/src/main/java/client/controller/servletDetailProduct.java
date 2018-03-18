@@ -7,6 +7,9 @@ package client.controller;
 
 import admin.connectdb.dbs;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Aggregates;
+import static com.mongodb.client.model.Aggregates.limit;
+import static com.mongodb.client.model.Aggregates.skip;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
 import static com.mongodb.client.model.Filters.lte;
 import com.mongodb.client.model.Sorts;
+import com.mongodb.util.JSON;
+import java.util.Arrays;
 import java.util.Date;
 import org.bson.BsonDateTime;
 import org.bson.BsonInt32;
@@ -41,9 +46,19 @@ public class servletDetailProduct extends HttpServlet {
         String idpro = request.getParameter("detail");
 
         if (idpro.length() > 0 && idpro != null) {
+            
+            
 
-            MongoCursor<Document> doc = new dbs().getcolproduct
-                    .find(eq("_id", new BsonObjectId(new ObjectId(idpro)))).iterator();
+            MongoCursor<Document> doc = new dbs().getcolproduct.aggregate(
+                    Arrays.asList(
+                            Aggregates.lookup("colclient", "clientid", "_id", "colclient"),
+                            Aggregates.match(Filters.eq("_id", 
+                                    new BsonObjectId(new ObjectId(idpro))))
+                     ) 
+            ).iterator();
+            
+//                    new dbs().getcolproduct
+//                    .find(eq("_id", new BsonObjectId(new ObjectId(idpro)))).iterator();
 
             request.setAttribute("datadetail", doc);
             RequestDispatcher rd = request.getRequestDispatcher("products_detail.jsp");

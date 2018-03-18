@@ -8,6 +8,8 @@ package admin.controller;
 import admin.connectdb.dbs;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +37,8 @@ public class servletColProduct extends HttpServlet {
         String col = request.getParameter("col");
         if (col.equals("data")) {
 
-            MongoCursor<Document> cursor = new dbs().getcolproduct.find().iterator();
+            MongoCursor<Document> cursor = new dbs().getcolproduct.find()
+                    .sort(Sorts.descending("createddate")).iterator();
 
             request.setAttribute("datacol", cursor);
 

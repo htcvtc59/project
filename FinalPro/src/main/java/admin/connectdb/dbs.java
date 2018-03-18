@@ -1,35 +1,31 @@
 package admin.connectdb;
 
-import client.controller.servletCreateProduct;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.model.FindOneAndUpdateOptions;
-import com.mongodb.client.model.ReturnDocument;
-import com.mongodb.client.model.Sorts;
-import com.mongodb.client.model.UpdateOptions;
-import static com.mongodb.client.model.Updates.*;
+import com.mongodb.client.model.Accumulators;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.util.JSON;
-import java.sql.DatabaseMetaData;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.bson.BsonDateTime;
-import org.bson.BsonDouble;
-import org.bson.BsonInt32;
 import org.bson.BsonObjectId;
-import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import static com.mongodb.client.model.Aggregates.*;
+import com.mongodb.client.model.BsonField;
+import com.mongodb.client.model.Filters;
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.Sorts;
+import static com.mongodb.client.model.Sorts.ascending;
+import static com.mongodb.client.model.Sorts.descending;
+import static com.mongodb.client.model.Sorts.orderBy;
+import java.util.Arrays;
+import java.util.Iterator;
+import org.bson.BsonInt32;
 
 public class dbs {
 
@@ -92,8 +88,83 @@ public class dbs {
 //            result += cursor.next().toJson();
 //        }
 //        System.out.println(result);
-       
+        System.out.println(JSON.serialize(new dbs().getcolproduct.aggregate(
+                Arrays.asList(
+                        Aggregates.lookup("colclient", "clientid", "_id", "colclient"),
+                        skip(0), limit(3),
+                        Aggregates.match(Filters.eq("status", 3))
+                )
+        )));
 
+        MongoCursor<Document> doc = new dbs().getcolproduct.aggregate(
+                Arrays.asList(
+                        Aggregates.lookup("colclient", "clientid", "_id", "colclient"),
+                        Aggregates.match(Filters.eq("_id",
+                                new BsonObjectId(new ObjectId("5aa724713b3b674150b16f2e"))))
+                )
+        ).iterator();
+
+        while (doc.hasNext()) {
+            Document d = doc.next();
+
+            JsonArray colclientArr = new Gson().fromJson(d.toJson(), JsonObject.class).getAsJsonArray("colclient");
+            Iterator<JsonElement> clientarr = colclientArr.iterator();
+            while (clientarr.hasNext()) {
+                JsonElement ele = clientarr.next();
+                JsonObject clientobj = ele.getAsJsonObject();
+                
+                String sellname = clientobj.get("name").getAsString();
+                
+                String sellphone = clientobj.get("phone").getAsJsonObject().get("name").getAsString();
+                
+
+                String sellemail = clientobj.get("email").getAsJsonObject().get("name").getAsString();
+
+                String selladdress = clientobj.get("address").getAsString();
+
+            }
+            
+           MongoCursor<Document> doc1 =  new dbs().getcolproduct.aggregate(
+                Arrays.asList(
+                        Aggregates.lookup("colclient", "clientid", "_id", "colclient"),
+                         Aggregates.sort(orderBy(ascending("winner.idwinbid"))),
+                          Aggregates.match(Filters.eq("clientid",
+                                new BsonObjectId(new ObjectId("5aa5867d3b3b672754d4eabd"))))
+                )
+        ).iterator();
+           while(doc1.hasNext()){
+               Document dc = doc1.next();
+               System.out.println(dc.toJson());
+           }
+        }
+        
+         MongoCursor<Document> prodone =
+                    new dbs().getcolproduct.aggregate(
+                    Arrays.asList(
+                            Aggregates.lookup("colbid", "winner.idwinbid", "_id", "colbid"),
+                            Aggregates.match(Filters.eq("_id",
+                                new BsonObjectId(new ObjectId("5aa725573b3b674150b16f31")))),
+                            Aggregates.match(Filters.eq("status", 3))
+                    )
+            ).iterator();
+         
+         while(prodone.hasNext()){
+             Document d = prodone.next();
+             
+             
+            JsonObject rootibj = new Gson().fromJson(d.toJson().toString(),
+                    JsonElement.class).getAsJsonObject();
+            
+            JsonArray colbid = rootibj.get("colbid").getAsJsonArray();
+            JsonObject colbidroot = colbid.get(0).getAsJsonObject();
+            String nameclient = colbidroot.get("nameclient").getAsString();
+            String startprice = colbidroot.get("startprice").getAsString();
+            
+             System.out.println(nameclient+startprice);
+            
+            
+            
+         }
     }
 
 }

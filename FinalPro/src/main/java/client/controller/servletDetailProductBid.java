@@ -7,6 +7,10 @@ package client.controller;
 
 import admin.connectdb.dbs;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Aggregates;
+import static com.mongodb.client.model.Aggregates.limit;
+import static com.mongodb.client.model.Aggregates.skip;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gt;
@@ -14,6 +18,7 @@ import static com.mongodb.client.model.Filters.lte;
 import com.mongodb.client.model.Sorts;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,9 +62,15 @@ public class servletDetailProductBid extends HttpServlet {
                             eq("_id", new BsonObjectId(new ObjectId(idprodetailbid))))).iterator();
             System.out.println(prodoing);
 
-            MongoCursor<Document> prodone = new dbs().getcolproduct
-                    .find(and(eq("status", new BsonInt32(3)),
-                            eq("_id", new BsonObjectId(new ObjectId(idprodetailbid))))).iterator();
+           MongoCursor<Document> prodone =
+                    new dbs().getcolproduct.aggregate(
+                    Arrays.asList(
+                            Aggregates.lookup("colbid", "winner.idwinbid", "_id", "colbid"),
+                            Aggregates.match(Filters.eq("_id",
+                                new BsonObjectId(new ObjectId(idprodetailbid)))),
+                            Aggregates.match(Filters.eq("status", 3))
+                    )
+            ).iterator();
 
             System.out.println(prodone);
 

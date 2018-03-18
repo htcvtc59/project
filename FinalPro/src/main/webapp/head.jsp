@@ -6,6 +6,21 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <title>Auction</title>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/592bdcb94374a471e7c503f7/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/asset/client/favicon.ico" type="image/x-icon">
 <link rel="icon" href="<%=request.getContextPath()%>/asset/client/favicon.ico" type="image/x-icon">
 
