@@ -1,0 +1,157 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mail</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: "lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        #main {
+            width: 50%;
+            margin: auto;
+            height: 500px;
+        }
+
+        #contextmail {
+            width: 80%;
+            height: 600px;
+            margin: 5em auto;
+            border: 1px solid #e0e4e8;
+        }
+
+        .hey-there {
+            font-size: 20px;
+            text-align: left;
+            margin-top: 60px;
+            margin-left: 60px;
+        }
+
+        .startone div {
+            font-size: 20px;
+            text-align: left;
+            margin-top: 20px;
+            margin-left: 40px;
+        }
+
+        .startone a {
+            text-decoration: none;
+        }
+
+        .imgpro img {
+            margin-left: 40px;
+            margin-top: 40px;
+        }
+
+        .pricepro {
+            margin-left: 40px;
+            margin-top: 40px;
+        }
+
+        .clickpay {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .payclickmepay {
+            background-color: #E15718;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 44px;
+            text-align: center;
+            width: 250px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="contextmail">
+            <div class="hey-there">
+                Hey there!
+            </div>
+            <div class="startone">
+                <div>You win !</div>
+                <div>This is your
+                    <a href="<%=linkdetail%>" target="_blank">product</a>:</div>
+            </div>
+            <div class="imgpro">
+                <img src="<%=image%>" alt="" width="100" height="100">
+            </div>
+            <div class="pricepro">
+                <h4>Price : $
+                    <%=dataprice%> USD</h4>
+                <div>Please click the following link to contact :</div>
+            </div>
+            <div class="clickpay">
+                <form hidden="true" action="<%=linkpay%>" method="POST">
+                    <input type="hidden" id="name" name="name" value="<%=name%>" />
+                    <input type="hidden" id="price" name="price" value="<%=dataprice%>" />
+                    <input type="hidden" id="quantity" name="quantity" value="<%=idpro%>" />
+                    <input type="hidden" id="idpro" name="idpro" value="<%=idpro%>" />
+
+                    <input type="submit" value="Pay" class="payclickmepay" />
+                </form>
+                <div hidden="true">
+                    <form action="<%=linkstripe%>" method="POST">
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_dMOrASP37wKPhaCQaxegqxaf" data-amount="<%=dataprice*100%>"
+                            data-name="Order" data-description="Auction" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto">
+                            </script>
+
+                    </form>
+                </div>
+
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Seller
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Infor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div> Name: <%=sellname%></div>
+          <div> Email: <%=sellemail%></div>
+          <div> Phone: <%=sellphone%></div>
+          <div> Address: <%=selladdress%></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

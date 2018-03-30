@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "ejs": "2.5.7",
+    "express": "4.16.2",
+    "moment": "2.20.1",
+    "mongo-oplog": "2.1.0",
+    "mongo-oplog-watch": "1.0.3",
+    "mongoose": "5.0.5",
+    "nedb": "1.8.0",
+    "nodemailer": "4.6.2",
+    "nodemon": "1.14.12",
+    "paypal-rest-sdk": "^1.8.1",
+    "socket.io": "2.0.4",
+    "stripe": "5.5.0"
+  }
+}
