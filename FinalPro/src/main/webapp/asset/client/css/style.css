@@ -3440,6 +3440,7 @@ h2.typoh2{
 /* image thumbai */
 #thumbs { padding-top: 10px; overflow: hidden; }
 #thumbs img, #largeImage {
+    margin-right: 10px;
     border: 1px solid gray;
     padding: 4px;
     background-color: white;
@@ -3462,6 +3463,7 @@ h2.typoh2{
 }
 #panel {
     position: relative;
+    float: left;
 }
 /* image thumbai */
 
@@ -3471,4 +3473,9 @@ h2.typoh2{
     margin-bottom: 2%;
     margin-left: 26%;
     font-size: 18px;
+}
+.seller{
+    position: absolute;
+    bottom: 0px;
+    right: 50%;
 }

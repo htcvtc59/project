@@ -99,13 +99,26 @@
             <div class="container">
                 <div class="single-info">		
                     <div class="col-md-6 single-top wow fadeInLeft animated" data-wow-delay=".5s">	
-                       
+<!--                        <div class="flexslider">
+                            <ul class="slides">
+                                <%                      
+                                    for (String imgimore : slide.split(",")) {
+
+                                %>
+                                <li data-thumb="<%=request.getContextPath()%><%=imgimore%>">
+                                    <div class="thumb-image"> <img src="<%=request.getContextPath()%><%=imgimore%>" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                </li>
+                                <%
+                                    }
+                                %>
+
+                            </ul>
+                        </div>-->
                                 
                         <div id="gallery" class="col-md-5 modal_body_left">
                         <div id="panel">
-                                <img width="365px" height="460px" id="largeImage" src="<%=request.getContextPath()%>/asset/client/images/s1.jpg" />
-                        </div>
-                        <div id="thumbs">
+                                <img width="365px" height="460px" id="largeImage" src="<%=request.getContextPath()%><%=slide.split(",")[0]%>" />
+                                <div id="thumbs">
      <%                      
                                     for (String imgimore : slide.split(",")) {
 
@@ -118,6 +131,10 @@
    
                         </div>
                         </div>
+                        
+                        </div>
+                                
+
                     <script type="text/javascript">
                             $('#thumbs img').click(function () {
                             $('#largeImage').attr('src', $(this).attr('src').replace('thumb', 'large'));
@@ -127,7 +144,7 @@
                                 
                                 
                     </div>
-                    <div class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
+                    <div style="margin-left: 20px;" class="col-md-6 single-top-left simpleCart_shelfItem wow fadeInRight animated" data-wow-delay=".5s">
                         <h3><%=nameproduct%></h3>
                         <div class="single-rating">
                             <span class="starRating">
@@ -152,7 +169,7 @@
                     </div>
                         
                                   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="seller btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Seller
   </button>
   
